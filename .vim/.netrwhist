@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/cygdrive/c/Users/Krime/Desktop/Krime/Home/Projects'
+let g:netrw_dirhist_2='/root/experiment/Debug'
+let g:netrw_dirhist_3='/home/krime/Experiment/OpenMP/src'
+let g:netrw_dirhist_4='/home/krime/Experiment/Excalibur/src'
+let g:netrw_dirhist_5='/home/krime/Arena/3d2rew/src'
