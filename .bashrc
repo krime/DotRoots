@@ -138,10 +138,15 @@ export EDITOR='/usr/bin/vim'
 # export GASNET_SSH_SERVERS="c1 c2"
 
 # Perl Module Paths
-export PERL_MB_OPT="--install_base /opt/perl5"
-export PERL_MM_OPT="INSTALL_BASE=/opt/perl5"
-export PERL5LIB=/opt/perl5/lib/perl5/x86_64-linux:/opt/perl5/lib/perl5:$PERL5LIB
-export PATH=/opt/perl5/bin:$PATH
+export PERL_HOME=/opt/apps/perl5
+export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:$PERL_HOME";
+export PERL_MB_OPT="--install_base $PERL_HOME"
+export PERL_MM_OPT="INSTALL_BASE=$PERL_HOME"
+export PERL5LIB="$PERL_HOME/lib/perl5/x86_64-linux:$PERL_HOME/lib/perl5:$PERL5LIB"
+export PERLLIB=$PERL5LIB
+export PATH="$PERL_HOME/bin:$PATH"
+export PERLBREW_ROOT=/opt/apps/perlbrew
+[ -f $PERLBREW_ROOT/etc/bashrc ] && source $PERLBREW_ROOT/etc/bashrc
 
 export JAVA_HOME=/usr/java/latest
 
@@ -168,11 +173,11 @@ export IDUTILS_HOME=/opt/idutils
 export PATH=$CTAGS_HOME/bin:$GTAGS_HOME/bin:$CSCOPE_HOME/bin:$IDUTILS_HOME/bin:$PATH
 
 # NODEJS
-export NODE_HOME=/opt/node
+export NODE_HOME=/apps/node
 export PATH=$NODE_HOME/bin:$PATH
 
 # NGINX
-export NGINX_HOME=/opt/nginx
+export NGINX_HOME=/apps/nginx
 export PATH=$NGINX_HOME/sbin:$PATH
 
 # Google Performance Tools
