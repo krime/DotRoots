@@ -53,6 +53,15 @@ function! ConvertFileToQualifyedClass(filename)
    return substitute(fileNoPrefixNoExtension, '/','.','g')[1:]
 endfunction
 
+function! InsertPackage()
+  let l:package = substitute(expand("%"),'^'.s:maven_prefix.'/','','')
+  let l:filename = expand("%:t")
+  let l:package = substitute(l:package,'/'.l:filename.'$','','')
+  let l:package = substitute(l:package,'/','.','g')
+  G
+  call feedkeys("Opackage ".l:package.";\<CR>\<ESC>", 't')
+endfunction
+
 function! InsertImport()
    let word = expand("<cword>")
    if empty(word)
@@ -73,6 +82,6 @@ function! InsertImport()
 endfunction
 
 noremap <Leader>ji :call InsertImport()<CR>
-
+noremap <Leader>jp :call InsertPackage()<CR>
 noremap <Leader>jt :!ctags -R s:maven_prefix<CR> 
 
