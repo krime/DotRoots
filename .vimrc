@@ -937,3 +937,8 @@ let g:NERDTreeDirArrowExpandable = '>'
 let g:NERDTreeDirArrowCollapsible = 'v'
 "autocmd vimenter * NERDTree
 map <f3> :NERDTreeToggle<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" JIDE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:JIDE_tags_home = $HOME."/.vim/tags"
