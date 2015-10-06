@@ -1,3 +1,39 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+" Copyright (C) 2011-2015, Touna.cn, Shenzhen Investment Financial Services Co.,Ltd., all rights reserved
+" 
+" This program is privacy software; you cannot redistribute it and/or
+" modify it under the terms of the Touna.cn Privacy License
+" as published by the Touna Shenzhen.
+" 
+" This program is distributed in the hope that it will be useful,
+" but WITHOUT ANY WARRANTY; without even the implied warranty of
+" FREEANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+" GNU General Public License for more details.
+" 
+" You should have received a copy of the GNU General Public License
+" along with this program; if not, write to the free Software
+" Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" @file           .vimrc
+" @brief          Vim Configuration File
+" @author         Krime Lam<krimelam@gmail.com>
+" @version        v1.0.0.151007
+" @date           Wed 07 Oct 2015 02:59:21 AM HKT
+" @copyright      Copyright (C) 2011-2015, clicoder.com
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"     o
+"      o
+"       /`ヘ、
+"      (°、  7
+"      )   °(
+"      |ヘ ,~\\
+"      じじf,,)ノ
+"
+"
+"
+"
+"
 " " set the runtime path to include Vundle and initialize
 " set rtp+=~/.vim/bundle/Vundle.vim
 " call vundle#begin()
@@ -328,8 +364,8 @@ function! PromoteToLet()
   :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
   :normal ==
 endfunction
-:command! PromoteToLet :call PromoteToLet()
-:map <leader>p :PromoteToLet<cr>
+command! PromoteToLet :call PromoteToLet()
+map <leader>p :PromoteToLet<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTRACT VARIABLE (SKETCHY)
