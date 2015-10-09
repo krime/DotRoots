@@ -1,0 +1,158 @@
+#!/bin/bash
+
+################################################################################
+# @file    common.sh
+# @author  Krime <krimelam@gmail.com>
+# @date    Sat, Feb 22, 2014 11:39:33 AM
+# @misc    A useful information collection shell
+# @copy    (c)MindMesser
+# @version v1.0.0.140222
+################################################################################
+
+#===============================================================================
+# @func gitstat
+#===============================================================================
+gitstat() {
+  GitBranchStat=$(git status -s 2> /dev/null)
+  GitBranchStatResult=$?
+  GitBranchName=$(git branch --color=never 2> /dev/null | sed -n '/^\*/s@\* @@p')
+  
+#===============================================================================
+# @var CG Green
+# @var CL LightGreen
+# @var CD DarkGrey
+# @var CN Null
+#===============================================================================
+  if [ x"$TERM" = x"xterm" ]; then
+    CG=$"\e[1;38;5;2m"
+    CL=$"\e[1;38;5;78m"
+  else
+    CG=$"\e[1;32m"
+    CL=$"\e[0;32m"
+  fi
+  CD=$"\e[1;30m"
+  CN=$"\e[m"
+
+  if [ ! $GitBranchStatResult -eq 0 ]; then
+    echo -en $"$CN"
+  elif [ x$"$GitBranchStat" = x$"" ]; then
+    echo -en $"$CD[$CG#"
+  else
+    echo -en $"$CD[$CL*"
+  fi
+  echo -n $(git branch --color=never 2> /dev/null | sed -n '/^\*/s@\* @@p')
+  if [ $GitBranchStatResult -eq 0 ]; then
+    if [ x$"$GitBranchStat" = x$"" ]; then
+      echo -n $"#"
+    else
+      echo -n $"*"
+    fi
+    echo -en $"$CN$CD]$CN"
+  fi
+}
+
+#===============================================================================
+# @func pr_xterm_colors
+#===============================================================================
+xtermcap() {
+  oldterm=$TERM
+  TERM='xterm-256color'
+  x=`tput op`
+
+  echo '' {0..9} {a..f}
+  for i in {0..15}; do
+    for j in {0..15}; do
+      k=$((i*16+j))
+      l=$((i*16+15-j))
+      printf "%s%2x" `tput setaf $l
+      tput setab $k` $k
+    done
+    printf "%s%2x\n" `tput sgr0` $i
+  done
+  echo
+  TERM=$oldterm
+}
+
+termcap() {
+  oldterm=$TERM
+  TERM=$'xterm-256color'
+
+  for i in {0..7}; do
+    printf "%s%02x%s" `tput setaf $i` $i `tput sgr0`;
+  done;
+  printf "%s%s" `tput sgr0` " ";
+  for i in {0..7}; do
+    printf "%s%2s%s" `tput setab $i` "  " `tput sgr0`;
+  done;
+  printf "%s\n" `tput sgr0`;
+  for i in {8..15}; do
+    printf "%s%02x%s" `tput setaf $i` $i `tput sgr0`;
+  done;
+  printf "%s%s" `tput sgr0` " ";
+  for i in {8..15}; do
+    printf "%s%2s%s" `tput setab $i` "  " `tput sgr0`;
+  done;
+  printf "%s\n" `tput sgr0`;
+  for i in {1..36}; do
+    for j in {0..5}; do
+      k=$((i*6+10+j));
+      printf "%s%2x%s" `tput setaf $k` $k `tput sgr0`;
+    done;
+    printf "%s%s" `tput sgr0` "     ";
+    for j in {0..5}; do
+      k=$((i*6+10+j));
+      printf "%s%2s%s" `tput setab $k` "  " `tput sgr0`;
+    done;
+    printf "%s\n" `tput sgr0`;
+  done;
+  for i in {232..255}; do
+    printf "%s%2x%s" `tput setaf $i` $i `tput sgr0`;
+  done;
+  printf "%s\n" `tput sgr0`;
+  for i in {232..255}; do
+    printf "%s%2s%s" `tput setab $i` "  " `tput sgr0`;
+  done;
+  printf "%s\n" `tput sgr0`;
+}
+
+termcapbold() {
+  oldterm=$TERM
+  TERM=$'xterm-256color'
+
+  for i in {0..7}; do
+    printf "%s%s%02x%s" `tput bold` `tput setaf $i` $i `tput sgr0`;
+  done;
+  printf "%s%s" `tput sgr0` " ";
+  for i in {0..7}; do
+    printf "%s%s%2s%s" `tput bold` `tput setab $i` "  " `tput sgr0`;
+  done;
+  printf "%s\n" `tput sgr0`;
+  for i in {8..15}; do
+    printf "%s%s%02x%s" `tput bold` `tput setaf $i` $i `tput sgr0`;
+  done;
+  printf "%s%s" `tput sgr0` " ";
+  for i in {8..15}; do
+    printf "%s%s%2s%s" `tput bold` `tput setab $i` "  " `tput sgr0`;
+  done;
+  printf "%s\n" `tput sgr0`;
+  for i in {1..36}; do
+    for j in {0..5}; do
+      k=$((i*6+10+j));
+      printf "%s%s%2x%s" `tput bold` `tput setaf $k` $k `tput sgr0`;
+    done;
+    printf "%s%s" `tput sgr0` "     ";
+    for j in {0..5}; do
+      k=$((i*6+10+j));
+      printf "%s%s%2s%s" `tput bold` `tput setab $k` "  " `tput sgr0`;
+    done;
+    printf "%s\n" `tput sgr0`;
+  done;
+  for i in {232..255}; do
+    printf "%s%s%2x%s" `tput bold` `tput setaf $i` $i `tput sgr0`;
+  done;
+  printf "%s\n" `tput sgr0`;
+  for i in {232..255}; do
+    printf "%s%s%2s%s" `tput bold` `tput setab $i` "  " `tput sgr0`;
+  done;
+  printf "%s\n" `tput sgr0`;
+}

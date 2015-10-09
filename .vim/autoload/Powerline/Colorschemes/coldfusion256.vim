@@ -136,7 +136,7 @@ let g:Powerline#Colorschemes#coldfusion256#colorscheme = Pl#Colorscheme#Init([
 		\ }),
 	\
 	\ Pl#Hi#Segments(['paste_indicator', 'ws_marker'], {
-		\ 'n': ['base3', 'red', ['bold']],
+		\ 'n': ['base3', 'green', ['bold']],
 		\ }),
 	\
 	\ Pl#Hi#Segments(['gundo:static_str.name', 'command_t:static_str.name'], {

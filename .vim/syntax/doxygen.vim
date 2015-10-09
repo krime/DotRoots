@@ -193,14 +193,14 @@ set cpo&vim
 "
 
 " C/C++ Style line comments
-syn region doxygenComment start=+/\*\(\*/\)\@![*!]+  end=+\*/+ contains=doxygenSyncStart,doxygenStart,doxygenTODO,doxygenSTEP keepend
+syn region doxygenComment start=+/\*\(\*/\)\@![*!]\**+  end=+\*/+ contains=doxygenSyncStart,doxygenStart,doxygenTODO,doxygenSTEP keepend
 syn region doxygenCommentL start=+//[/!]<\@!+me=e-1 end=+$+ contains=doxygenStartL keepend skipwhite skipnl nextgroup=doxygenComment2
 syn region doxygenCommentL start=+//[/!]<+me=e-2 end=+$+ contains=doxygenStartL keepend skipwhite skipnl
 syn region doxygenCommentL start=+//@\ze[{}]+ end=+$+ contains=doxygenGroupDefine,doxygenGroupDefineSpecial
 syn region doxygenCommentC start=+//+me=e-1 end=+$+ contains=doxygenSyncStart,doxygenStart,doxygenTODO,doxygenSTEP keepend skipwhite skipnl
 
 " Single line brief followed by multiline comment.
-syn region doxygenComment2 start=+/\*\(\*/\)\@![*!]+ end=+\*/+ contained contains=doxygenSyncStart2,doxygenStart2,doxygenTODO,doxygenSTEP keepend
+syn region doxygenComment2 start=+/\*\(\*/\)\@![*!]\**+ end=+\*/+ contained contains=doxygenSyncStart2,doxygenStart2,doxygenTODO,doxygenSTEP keepend
 " This helps with sync-ing as for some reason, syncing behaves differently to a normal region, and the start pattern does not get matched.
 syn match doxygenSyncStart2 +[^*/]+ contained nextgroup=doxygenBody,doxygenPrev,doxygenStartSpecial,doxygenSkipComment,doxygenStartSkip2 skipwhite skipnl
 
@@ -211,9 +211,9 @@ syn match doxygenStart2 +/\*[*!]+ contained nextgroup=doxygenBody,doxygenPrev,do
 
 " Match the Starting pattern (effectively creating the start of a BNF)
 if !exists('g:doxygen_javadoc_autobrief') || g:doxygen_javadoc_autobrief
-  syn match doxygenStart +/\*[*!]+ contained nextgroup=doxygenBrief,doxygenPrev,doxygenFindBriefSpecial,doxygenStartSpecial,doxygenStartSkip,doxygenPage skipwhite skipnl
+  syn match doxygenStart +/\*[*!]\**+ contained nextgroup=doxygenBrief,doxygenPrev,doxygenFindBriefSpecial,doxygenStartSpecial,doxygenStartSkip,doxygenPage skipwhite skipnl
 else
-  syn match doxygenStart +/\*[*!]+ contained nextgroup=doxygenBody,doxygenPrev,doxygenFindBriefSpecial,doxygenStartSpecial,doxygenStartSkip,doxygenPage skipwhite skipnl
+  syn match doxygenStart +/\*[*!]\**+ contained nextgroup=doxygenBody,doxygenPrev,doxygenFindBriefSpecial,doxygenStartSpecial,doxygenStartSkip,doxygenPage skipwhite skipnl
 endif
 syn match doxygenStartL +//[/!]+ contained nextgroup=doxygenPrevL,doxygenBriefL,doxygenSpecial skipwhite
 
@@ -400,7 +400,7 @@ syn region doxygenFormula contained matchgroup=doxygenFormulaEnds start=+f\[+ en
 syn region doxygenAtom contained transparent matchgroup=doxygenFormulaOperator start=+{+ end=+}+ contains=doxygenAtom,doxygenFormulaSpecial,doxygenFormulaOperator
 
 " Add TODO hilighting.
-syn keyword doxygenTODO contained TODO README XXX FIXME
+syn keyword doxygenTODO contained TODO README XXX FIXME NOTE
 syn match doxygenSTEP contained "[Ss]tep\ \+[0-9]\+"
 
 " Supported HTML subset.  Not perfect, but okay.

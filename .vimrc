@@ -51,25 +51,27 @@ set ts=2
 set sts=2
 set sw=2
 set expandtab
-set nowrap
+" set nowrap
 set nobackup
 set noswapfile
-set pastetoggle=<f2>
+set visualbell
+set noerrorbells
 set dir=~/tmp/vim
 set listchars=tab:››,trail:·,eol:¶,extends:▶,precedes:◀
 
 " -- omnicppcomplete setting --
-set tags+=/home/alice/.vim/tags/c.tags
-set tags+=/home/alice/.vim/tags/cpp.tags
-set tags+=/home/alice/.vim/tags/posix.tags
-set tags+=/home/alice/.vim/tags/glib.tags
-set tags+=/home/alice/.vim/tags/gl.tags
-set tags+=/home/alice/.vim/tags/sdl.tags
-set tags+=/home/alice/.vim/tags/ompi.tags
-set tags+=/home/alice/.vim/tags/java.tags
-set tags+=/home/alice/.vim/tags/jetty.tags
-set tags+=/home/alice/.vim/tags/servlet-api.tags
+set tags+=$HOME/.vim/tags/c.tags
+set tags+=$HOME/.vim/tags/cpp.tags
+set tags+=$HOME/.vim/tags/posix.tags
+set tags+=$HOME/.vim/tags/glib.tags
+set tags+=$HOME/.vim/tags/gl.tags
+set tags+=$HOME/.vim/tags/sdl.tags
+set tags+=$HOME/.vim/tags/ompi.tags
+set tags+=$HOME/.vim/tags/java.tags
+set tags+=$HOME/.vim/tags/jetty.tags
+set tags+=$HOME/.vim/tags/servlet-api.tags
 set tags+=tags/ctags/tags
+set tags+=tags/tags
 " -- build tags of your own project with Ctrl-F12
 map <C-F12> :!ctags --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q -L config/list -f tags/ctags/tags
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
@@ -97,21 +99,29 @@ set nocompatible
 set hidden
 " remember more commands and search history
 set history=100000
+set undolevels=100000
 set nocp
 set expandtab
 set tabstop=2
+"set ts=2
 set shiftwidth=2
+"set sw=2
+set shiftround
 set softtabstop=2
+"set sts=2
 set autoindent
+set autowrite
+set notextmode
+set notextauto
 set laststatus=2
-set sts=2
+set pastetoggle=<F2>
 set showmatch
 set matchtime=3
 inoremap } }<Left><c-o>%<c-o>:sleep 500m<CR><c-o>%<c-o>a
 inoremap ] ]<Left><c-o>%<c-o>:sleep 500m<CR><c-o>%<c-o>a
 inoremap ) )<Left><c-o>%<c-o>:sleep 500m<CR><c-o>%<c-o>a
-set incsearch
 set hlsearch
+set incsearch
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,GB18030,cp936,big5,euc-jp,euc-kr,latin1
@@ -151,7 +161,7 @@ filetype plugin indent on
 set wildmode=longest,list
 " make tab completion for files/buffers act like bash
 set wildmenu
-set wildignore+=*.o,*.a,*.so,*.obj,*.exe,*.lib,*.ncb,*.opt,*.plg,.svn,.git
+set wildignore+=*.o,*.a,*.so,*.obj,*.exe,*.class,*.swp,*.swo,*.pyc,*.elc,*.lib,*.ncb,*.opt,*.plg,.svn,.git,.hg,CVS
 set wildignorecase
 let mapleader=","
 " Fix slow O inserts
@@ -165,15 +175,24 @@ set number
 augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
-  autocmd FileType text setlocal textwidth=78
+  autocmd FileType text setlocal textwidth=80
   " Jump to last cursor position unless it's invalid or in an event handler
   autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
 
+  "Some simple config 150803
+  autocmd FileType *      set formatoptions=tcql nocindent comments&
+  autocmd FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,ex:*/,://
+  autocmd FileType c,cpp  ab #d #define
+  autocmd FileType c,cpp  ab #i #include
+  autocmd FileType c,cpp  ab #b /*******************************************************************************
+  autocmd FileType c,cpp  ab #e *******************************************************************************/
+  autocmd FileType c,cpp  ab #l /******************************************************************************/
+
   "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+  autocmd FileType perl,ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
   autocmd FileType python set sw=2 sts=2 et omnifunc=pythoncomplete
 
   autocmd FileType javascript set omnifunc=javascriptcomplete
@@ -515,6 +534,9 @@ command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 " Enable Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+let g:tagbar_iconchars = ['◆', '◇']
+let g:tagbar_iconchars = ['◥', '◢']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -544,6 +566,7 @@ set cspc=3
 " Doxygen Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:load_doxygen_syntax=1
+"let g:doxygen_javadoc_autobrief=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Doxygen Syntax
@@ -647,7 +670,51 @@ function ShortTabLine()
   return ret
 endfunction
 
-set tabline=%!ShortTabLine()
+function LongTabLine()
+  let ret = ''
+  let lsp = ''
+  let rsp = ''
+  for i in range(tabpagenr('$'))
+    " select the color group for highlighting active tab
+    if i + 1 == tabpagenr()
+      "let ret .= '%#TabLineSel#'
+      let ret .= '%#TurboHeadCurrent#'
+      let lsp = ' '
+      let rsp = ' '
+    else
+      "let ret .= '%#TabLine#'
+      let ret .= '%#TurboHeadOthers#'
+      if i + 1 < tabpagenr() 
+        let lsp = '┊'
+        let rsp = ' '
+      else
+        let lsp = ' '
+        let rsp = '┊'
+      endif
+    endif
+
+    " find the buffername for the tablabel
+    let buflist = tabpagebuflist(i+1)
+    let winnr = tabpagewinnr(i+1)
+    let buffername = bufname(buflist[winnr - 1])
+    let filename = fnamemodify(buffername,':~')
+    " check if there is no name
+    if filename == ''
+      let filename = 'noname'
+    endif
+    " only show the first 6 letters of the name  and
+    " .. if the filename is more than 8 letters long
+    let ret .= lsp.filename.rsp
+  endfor
+
+  " after the last tab fill with TabLineFill and reset tab page #
+  "let ret .= '%#TabLineFill#%T'
+  let ret .= '%#TurboHeadBarLine#%T'
+  return ret
+endfunction
+
+"set tabline=%!ShortTabLine()
+set tabline=%!LongTabLine()
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -847,16 +914,26 @@ augroup END
 augroup vimDOX
   au! Syntax {cpp,c,idl,java,jsp,sql}
   au Syntax {cpp,c,idl,java,jsp,sql} runtime syntax/doxygen.vim
+  au BufNewFile,BufRead *.doxygen setfiletype doxygen
 augroup END
 
 inoremap <c-g><c-v> <esc>:exe 'r ! ctags --format=1 -u --java-kinds=f -f - % \| sed "/\(public\|static\|final\)/d" \| $HOME/.vim/jide/getsetfields.pl'<cr>
 inoremap <c-g><c-c> <esc>:exe 'r ! echo -en '.expand('%:t:r')<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Markdown Syntax
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup vimMD
+  au! bufread,bufnewfile *.md set filetype=markdown syntax=markdown
+augroup end
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDTreeWinSize=20
+let g:NERDTreeShowLineNumbers=0
+let g:NERDTreeDirArrows=1
+let g:NERDTreeDirArrowExpandable = '>'
+let g:NERDTreeDirArrowCollapsible = 'v'
+"autocmd vimenter * NERDTree
 map <f3> :NERDTreeToggle<cr>
-let g:NERDTreeWinSize = 20
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'

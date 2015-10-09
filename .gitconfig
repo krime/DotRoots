@@ -1,15 +1,29 @@
 [user]
 	name = kings
 	email = kings@mars
+[alias]
+  lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  lg = !"git lg1"
 [core]
 	excludesfile = $HOME/.gitignore_global
 	editor = vim
 	eol = lf
 	logallrefupdates = true
-[difftool "sourcetree"]
+  pager = "less -F -X"
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
+[difftool "vimdiff"]
 	cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
+  renames = true
+[merge]
+	conflictstyle = diff3
+	tool = vimdiff
+[mergetool]
+  prompt = true
+[mergetool "vimdiff"]
 	cmd = vimdiff \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [branch]
@@ -17,24 +31,37 @@
 [branch "master"]
 	rebase = true
 [color]
-	status = always
 	ui = always
-[merge]
-	conflictstyle = diff3
-	tool = vimdiff
+[color "decorate"]
+  branch = 226
+  remoteBranch = 39
+  tags = 105
+  stash = 159
+  HEAD = 50 4 bold ul
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+	current = 46
+	local = 226
+	remote = 39
+  upstream = 9 15 bold
+  plain = 25 bold
 [color "diff"]
-  meta = yellow
-  frag = cyan
-  old = white dim
-  new = green
+  meta = 255 bold
+  frag = 6 bold
+  func = 111
+  context = 34 dim
+  old = 46 22 bold reverse
+  new = 46 22 bold
+  commit = 111 bold
+  whitespace = 255 20 bold reverse
 [color "status"]
-	added = green
-  changed = red dim bold
-	untracked = yellow bold
+  header = 255 bold
+	added = 46 bold
+  updated = 118
+  changed = 46 22
+	untracked = 226 bold
+  branch = 111 bold
+  nobranch = 154 bold
+  unmerged = 87
 [push]
 	default = current
 [http]

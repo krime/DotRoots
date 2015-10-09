@@ -11,8 +11,8 @@ endif
 
 let g:colors_name = "krime"
 
-hi Cursor ctermfg=0 ctermbg=255 cterm=NONE guifg=#182227 guibg=#9ea7a6 gui=NONE
-hi Visual ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#3f4b52 gui=NONE
+hi Cursor ctermfg=0 ctermbg=15 cterm=NONE guifg=#182227 guibg=#9ea7a6 gui=NONE
+hi Visual ctermfg=NONE ctermbg=17 cterm=bold guifg=NONE guibg=#3f4b52 gui=NONE
 hi CursorLine ctermfg=NONE ctermbg=233 cterm=NONE guifg=NONE guibg=#2e373b gui=NONE
 hi CursorColumn ctermfg=NONE ctermbg=23 cterm=NONE guifg=NONE guibg=#2e373b gui=NONE
 hi ColorColumn ctermfg=NONE ctermbg=23 cterm=NONE guifg=NONE guibg=#2e373b gui=NONE
@@ -28,11 +28,11 @@ hi Search ctermfg=NONE ctermbg=NONE cterm=inverse guifg=NONE guibg=NONE gui=unde
 hi Directory ctermfg=11 ctermbg=NONE cterm=NONE guifg=#3c98d9 guibg=NONE gui=NONE
 hi Folded ctermfg=240 ctermbg=16 cterm=NONE guifg=#9a9a9a guibg=#182227 gui=NONE
 
-hi Normal ctermfg=255 ctermbg=NONE cterm=NONE guifg=#f0f0f0 guibg=#252c31 gui=NONE
+hi Normal ctermfg=15 ctermbg=NONE cterm=NONE guifg=#f0f0f0 guibg=#252c31 gui=NONE
 hi Boolean ctermfg=68 ctermbg=NONE cterm=NONE guifg=#3c98d9 guibg=NONE gui=NONE
 hi Character ctermfg=68 ctermbg=NONE cterm=NONE guifg=#3c98d9 guibg=NONE gui=NONE
-hi Comment ctermfg=240 ctermbg=NONE cterm=NONE guifg=#9a9a9a guibg=NONE gui=italic
-hi CommentStat ctermfg=240 ctermbg=NONE cterm=NONE guifg=#9a9a9a guibg=NONE gui=italic
+hi Comment ctermfg=246 ctermbg=NONE cterm=NONE guifg=#9a9a9a guibg=NONE gui=italic
+hi CommentStat ctermfg=246 ctermbg=NONE cterm=NONE guifg=#9a9a9a guibg=NONE gui=italic
 hi Constant ctermfg=27 ctermbg=NONE cterm=underline guifg=#3c98d9 guibg=NONE gui=NONE
 hi Define ctermfg=227 ctermbg=NONE cterm=NONE guifg=#dda790 guibg=NONE gui=NONE
 hi DiffAdd ctermfg=231 ctermbg=64 cterm=bold guifg=#f0f0f0 guibg=#43820d gui=bold
@@ -42,7 +42,7 @@ hi DiffText ctermfg=231 ctermbg=24 cterm=bold guifg=#f0f0f0 guibg=#204a87 gui=bo
 hi ErrorMsg ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi WarningMsg ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi Float ctermfg=68 ctermbg=NONE cterm=NONE guifg=#3c98d9 guibg=NONE gui=NONE
-hi Function ctermfg=68 ctermbg=NONE cterm=NONE guifg=#bcdbff guibg=NONE gui=NONE
+hi Function ctermfg=75 ctermbg=NONE cterm=NONE guifg=#bcdbff guibg=NONE gui=NONE
 hi Identifier ctermfg=113 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
 hi link Conditional Statement
 hi link Keyword Statement
@@ -51,22 +51,24 @@ hi link Label Statement
 hi NonText ctermfg=234 ctermbg=232 cterm=NONE guifg=#414e58 guibg=#232c31 gui=NONE
 hi Number ctermfg=68 ctermbg=NONE cterm=NONE guifg=#3c98d9 guibg=NONE gui=NONE
 hi link Operator Statement
-hi PreProc ctermfg=68 ctermbg=NONE cterm=NONE guifg=#dda790 guibg=NONE gui=NONE
+hi PreProc ctermfg=75 ctermbg=NONE cterm=NONE guifg=#dda790 guibg=NONE gui=NONE
 hi Include ctermfg=83 ctermbg=NONE cterm=NONE guifg=#dda790 guibg=NONE gui=NONE
 hi Special ctermfg=28 ctermbg=NONE cterm=NONE guifg=#f0f0f0 guibg=NONE gui=NONE
-hi SpecialComment ctermfg=22 ctermbg=NONE cterm=NONE guifg=#f0f0f0 guibg=NONE gui=NONE
+hi SpecialComment ctermfg=28 ctermbg=NONE cterm=NONE guifg=#f0f0f0 guibg=NONE gui=NONE
 hi SpecialConstant ctermfg=22 ctermbg=NONE cterm=NONE guifg=#f0f0f0 guibg=NONE gui=NONE
 " hi SpecialKey ctermfg=227 ctermbg=23 cterm=NONE guifg=#414e58 guibg=#252c31 gui=NONE
 hi SpecialKey ctermfg=234 ctermbg=232 cterm=NONE guifg=#414e58 guibg=#252c31 gui=NONE
 hi Statement ctermfg=227 ctermbg=NONE cterm=NONE guifg=#dda790 guibg=NONE gui=NONE
-hi StorageClass ctermfg=113 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
+hi StorageClass ctermfg=84 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
+hi MethodClass ctermfg=154 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
+hi ScopeClass ctermfg=154 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
 hi String ctermfg=107 ctermbg=NONE cterm=NONE guifg=#8bb664 guibg=NONE gui=NONE
 hi Tag ctermfg=153 ctermbg=NONE cterm=NONE guifg=#bcdbff guibg=NONE gui=NONE
 hi Title ctermfg=231 ctermbg=NONE cterm=bold guifg=#f0f0f0 guibg=NONE gui=bold
 hi Todo ctermfg=15 ctermbg=NONE cterm=inverse,bold guifg=#9a9a9a guibg=NONE gui=inverse,bold,italic
 hi Type ctermfg=10 ctermbg=NONE cterm=NONE guifg=#b5d8f6 guibg=NONE gui=NONE
-hi Structure ctermfg=68 ctermbg=NONE cterm=NONE guifg=#b5d8f6 guibg=NONE gui=NONE
-hi Class ctermfg=62 ctermbg=NONE cterm=NONE guifg=#b5d8f6 guibg=NONE gui=NONE
+hi Structure ctermfg=75 ctermbg=NONE cterm=NONE guifg=#b5d8f6 guibg=NONE gui=NONE
+hi Class ctermfg=75 ctermbg=NONE cterm=NONE guifg=#b5d8f6 guibg=NONE gui=NONE
 hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline
 hi CTagsDefinedName ctermfg=14 ctermbg=NONE cterm=NONE guifg=#dda790 guibg=NONE gui=NONE
 hi CTagsEnumeratorName ctermfg=27 ctermbg=NONE cterm=NONE guifg=#dda790 guibg=NONE gui=NONE
@@ -82,7 +84,7 @@ hi link CTagsValue Normal
 hi link CTagsVal Normal
 hi link CTagsVar Normal
 hi link CTagsMember Normal
-hi CTagsGlobalVariable ctermfg=255 ctermbg=NONE cterm=underline guifg=#bbbbbb guibg=NONE gui=NONE
+hi CTagsGlobalVariable ctermfg=15 ctermbg=NONE cterm=underline guifg=#bbbbbb guibg=NONE gui=NONE
 hi rubyClass ctermfg=180 ctermbg=NONE cterm=NONE guifg=#dda790 guibg=NONE gui=NONE
 hi rubyFunction ctermfg=153 ctermbg=NONE cterm=NONE guifg=#bcdbff guibg=NONE gui=NONE
 hi rubyInterpolationDelimiter ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
@@ -107,7 +109,7 @@ hi rubyRailsARMethod ctermfg=186 ctermbg=NONE cterm=NONE guifg=#dad085 guibg=NON
 hi rubyRailsRenderMethod ctermfg=186 ctermbg=NONE cterm=NONE guifg=#dad085 guibg=NONE gui=NONE
 hi rubyRailsMethod ctermfg=186 ctermbg=NONE cterm=NONE guifg=#dad085 guibg=NONE gui=NONE
 hi erubyDelimiter ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
-hi erubyComment ctermfg=247 ctermbg=NONE cterm=NONE guifg=#9a9a9a guibg=NONE gui=italic
+hi erubyComment ctermfg=247 ctermbg=NONE cterm=bold guifg=#9a9a9a guibg=NONE gui=italic
 hi erubyRailsMethod ctermfg=186 ctermbg=NONE cterm=NONE guifg=#dad085 guibg=NONE gui=NONE
 hi htmlTag ctermfg=111 ctermbg=NONE cterm=NONE guifg=#89bdff guibg=NONE gui=NONE
 hi htmlEndTag ctermfg=111 ctermbg=NONE cterm=NONE guifg=#89bdff guibg=NONE gui=NONE

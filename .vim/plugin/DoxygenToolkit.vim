@@ -957,21 +957,22 @@ endfunction
 " Define start/end documentation format and backup generic parameters.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:InitializeParameters()
-  if( s:CheckFileType() == "cpp" )
+  " FIXME This code block should be fixed by according the filetype
+  "if( s:CheckFileType() == "cpp" )
     let s:startCommentTag   = g:DoxygenToolkit_startCommentTag
     let s:interCommentTag   = g:DoxygenToolkit_interCommentTag
     let s:endCommentTag     = g:DoxygenToolkit_endCommentTag
     let s:startCommentBlock = g:DoxygenToolkit_startCommentBlock
     let s:interCommentBlock = g:DoxygenToolkit_interCommentBlock
     let s:endCommentBlock   = g:DoxygenToolkit_endCommentBlock
-  else
-    let s:startCommentTag   = "## "
-    let s:interCommentTag   = "# "
-    let s:endCommentTag     = ""
-    let s:startCommentBlock = "# "
-    let s:interCommentBlock = "# "
-    let s:endCommentBlock   = ""
-  endif
+  "else
+  "  let s:startCommentTag   = "## "
+  "  let s:interCommentTag   = "# "
+  "  let s:endCommentTag     = ""
+  "  let s:startCommentBlock = "# "
+  "  let s:interCommentBlock = "# "
+  "  let s:endCommentBlock   = ""
+  "endif
 
   " Backup standard comment expension and indentation
   let s:commentsBackup = &comments

@@ -682,8 +682,8 @@ syn keyword ngxDirectiveThirdParty uwsgi_string
 syn keyword ngxDirectiveThirdParty uwsgi_temp_file_write_size
 syn keyword ngxDirectiveThirdParty uwsgi_temp_path
 
-" uWSGI Module <http://wiki.nginx.org/HttpUwsgiModule>
-" Allows Nginx to interact with uWSGI processes and control what parameters are passed to the process.
+" SCGI Module <http://wiki.nginx.org/HttpScgiModule>
+" Allows Nginx to interact with SCGI processes and control what parameters are passed to the process.
 syn keyword ngxDirectiveThirdParty scgi_bind
 syn keyword ngxDirectiveThirdParty scgi_buffer_size
 syn keyword ngxDirectiveThirdParty scgi_buffering

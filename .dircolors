@@ -76,21 +76,21 @@ DIR 01;33 # directory
 LINK 01;36 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
-FIFO 40;32;01 # pipe
+FIFO 01;32;40 # pipe
 SOCK 01;36 # socket
 DOOR 01;33;44 # door
-BLK 40;31;01 # block device driver
-CHR 40;31;01 # character device driver
+BLK 01;31;40 # block device driver
+CHR 01;31;40 # character device driver
 ORPHAN 01;05;37;41 # orphaned syminks
 MISSING 01;05;37;41 # ... and the files they point to
-SETUID 37;41 # file that is setuid (u+s)
-SETGID 30;43 # file that is setgid (g+s)
-CAPABILITY 30;41 # file with capability
-STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
-STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
+SETUID 41;37 # file that is setuid (u+s)
+SETGID 43;30 # file that is setgid (g+s)
+CAPABILITY 41;30 # file with capability
+STICKY_OTHER_WRITABLE 42;30 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 42;34 # dir that is other-writable (o+w) and not sticky
+STICKY 44;37 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 01;32
+EXEC 01;48;5;22;38;5;46
 # List any file extensions like '.gz' or '.tar' that you would like ls
 # to colorize below. Put the extension, a space, and the color init string.
 # (and any comments you want to add after a '#')
@@ -137,57 +137,61 @@ EXEC 01;32
 .cpio 01;31
 .7z 01;31
 .rz 01;31
+
 # image formats
-.jpg 01;33;44
-.jpeg 01;33;44
-.gif 01;33;44
-.bmp 01;33;44
-.pbm 01;33;44
-.pgm 01;33;44
-.ppm 01;33;44
-.tga 01;33;44
-.xbm 01;33;44
-.xpm 01;33;44
-.tif 01;33;44
-.tiff 01;33;44
-.png 01;33;44
-.svg 01;33;44
-.svgz 01;33;44
-.mng 01;33;44
-.pcx 01;33;44
-.mov 01;33;44
-.mpg 01;33;44
-.mpeg 01;33;44
-.m2v 01;33;44
-.mkv 01;33;44
-.webm 01;33;44
-.ogm 01;33;44
-.mp4 01;33;44
-.m4v 01;33;44
-.mp4v 01;33;44
-.vob 01;33;44
-.qt 01;33;44
-.nuv 01;33;44
-.wmv 01;33;44
-.asf 01;33;44
-.rm 01;33;44
-.rmvb 01;33;44
-.flc 01;33;44
-.avi 01;33;44
-.fli 01;33;44
-.flv 01;33;44
-.gl 01;33;44
-.dl 01;33;44
-.xcf 01;33;44
-.xwd 01;33;44
-.yuv 01;33;44
-.cgm 01;33;44
-.emf 01;33;44
+.jpg 01;38;5;202
+.jpeg 01;38;5;202
+.gif 01;38;5;202
+.bmp 01;38;5;202
+.pbm 01;38;5;202
+.pgm 01;38;5;202
+.ppm 01;38;5;202
+.tga 01;38;5;202
+.xbm 01;38;5;202
+.xpm 01;38;5;202
+.tif 01;38;5;202
+.tiff 01;38;5;202
+.png 01;38;5;202
+.svg 01;38;5;202
+.svgz 01;38;5;202
+.mng 01;38;5;202
+.pcx 01;38;5;202
+
+# video format
+.mov 01;38;5;27
+.mpg 01;38;5;27
+.mpeg 01;38;5;27
+.m2v 01;38;5;27
+.mkv 01;38;5;27
+.webm 01;38;5;27
+.ogm 01;38;5;27
+.mp4 01;38;5;27
+.m4v 01;38;5;27
+.mp4v 01;38;5;27
+.vob 01;38;5;27
+.qt 01;38;5;27
+.nuv 01;38;5;27
+.wmv 01;38;5;27
+.asf 01;38;5;27
+.rm 01;38;5;27
+.rmvb 01;38;5;27
+.flc 01;38;5;27
+.avi 01;38;5;27
+.fli 01;38;5;27
+.flv 01;38;5;27
+.gl 01;38;5;27
+.dl 01;38;5;27
+.xcf 01;38;5;27
+.xwd 01;38;5;27
+.yuv 01;38;5;27
+.cgm 01;38;5;27
+.emf 01;38;5;27
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axv 01;33;44
-.anx 01;33;44
-.ogv 01;33;44
-.ogx 01;33;44
+.axv 01;38;5;27
+.anx 01;38;5;27
+.ogv 01;38;5;27
+.ogx 01;38;5;27
+
 # Document files
 .pdf 01;38;05;33
 .ps 01;38;05;33
@@ -197,67 +201,121 @@ EXEC 01;32
 .log 01;38;05;33
 .tex 01;38;05;33
 .doc 01;38;05;33
-# audio formats
-.aac 00;36
-.au 00;36
-.flac 00;36
-.mid 00;36
-.midi 00;36
-.mka 00;36
-.mp3 00;36
-.mpc 00;36
-.ogg 00;36
-.ra 00;36
-.wav 00;36
-# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axa 00;36
-.oga 00;36
-.spx 00;36
-.xspf 00;36
 
+# audio formats
+.aac 01;38;5;135
+.ape 01;38;5;135
+.au 01;38;5;135
+.flac 01;38;5;135
+.mid 01;38;5;135
+.midi 01;38;5;135
+.m4a 01;38;5;135
+.mka 01;38;5;135
+.mp3 01;38;5;135
+.mpc 01;38;5;135
+.ogg 01;38;5;135
+.ra 01;38;5;135
+.wav 01;38;5;135
+# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
+.axa 01;38;5;135
+.oga 01;38;5;135
+.spx 01;38;5;135
+.xspf 01;38;5;135
+
+# webpage
 .md 01;38;05;38
 .xml 01;38;05;38
 .html 01;38;05;38
 .sgml 01;38;05;38
 .json 01;38;05;38
+.properties 01;38;05;249
 
+# style files
 .dtd 00;38;05;172
 .xsd 00;38;05;172
 .xls 00;38;05;172
 .css 00;38;05;172
 
+# configuration files
+.config 01;38;05;130
 .conf 01;38;05;130
 .cfg 01;38;05;130
 .ini 01;38;05;130
 .bat 01;38;05;130
+.cmd 01;38;05;130
 .gyp 01;38;05;130
 .ninja 01;38;05;130
 .sh 01;38;05;130
 .csh 01;38;05;130
+.mk 01;38;05;130
+.makefile 01;38;05;130
 
+# executable file format
+.exe 01;38;05;70
+.com 01;38;05;70
+.run 01;38;05;70
+.mex 01;38;05;70
+
+# error dump files
 .err 01;38;05;196
 .core 01;38;05;196
 
+# compiled files
 .elc 01;38;05;63
 .pyc 01;38;05;63
 .class 01;38;05;63
+.bin 01;38;05;63
+.obj 01;38;05;63
 
-.c 00;38;05;226
-.cc 00;38;05;226
-.cpp 00;38;05;226
-.cxx 00;38;05;226
-.h 00;38;05;226
-.hpp 00;38;05;226
-.hxx 00;38;05;226
-.cs 00;38;05;226
-.java 00;38;05;226
-.jsp 00;38;05;226
-.js 00;38;05;226
-.pl 00;38;05;226
-.py 00;38;05;226
-.rb 00;38;05;226
-.lua 00;38;05;226
-.vim 00;38;05;226
-.el 00;38;05;226
-.sql 00;38;05;226
-.m 00;38;05;226
+# sourcede file
+.c 00;38;05;159
+.cc 00;38;05;159
+.cpp 00;38;05;159
+.cxx 00;38;05;159
+.h 00;38;05;159
+.hpp 00;38;05;159
+.hxx 00;38;05;159
+.cs 00;38;05;159
+.java 00;38;05;159
+.jsp 00;38;05;159
+.js 00;38;05;159
+.pl 00;38;05;159
+.py 00;38;05;159
+.rb 00;38;05;159
+.lua 00;38;05;159
+.vim 00;38;05;159
+.el 00;38;05;159
+.sql 00;38;05;159
+.m 00;38;05;159
+
+# library files
+.a 00;38;05;120
+.lib 00;38;05;120
+.so 00;38;05;120
+.dll 00;38;05;120
+.dylib 00;38;05;120
+.mexdylib 00;38;05;120
+
+# runtime files
+.pid 01;38;05;28
+.lock 01;38;05;28
+
+# database file
+.db 01;38;05;48
+.rdb 01;38;05;48
+.pdb 01;38;05;48
+.gdb 01;38;05;48
+.dump 01;38;05;48
+.dat 01;38;05;48
+.data 01;38;05;48
+
+# backup files
+.back 01;38;05;88
+.bk 01;38;05;88
+.bak 01;38;05;88
+.backup 01;38;05;88
+.tmp 01;38;05;88
+.temp 01;38;05;88
+.tm 01;38;05;88
+.lst 01;38;05;88
+.list 01;38;05;88

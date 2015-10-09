@@ -1,0 +1,6 @@
+[ui]
+username = kings <kings@tonace>
+editor = vim
+verbose = True
+[extensions]
+trees = /opt/local/bin/trees.py
