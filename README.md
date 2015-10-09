@@ -7,6 +7,12 @@ Dot Files Managements
 * .inputrc
 > keyboard resources
 
+* .common/.shell
+> common useful shell functions
+
+* .common/.lessex
+> source-highlight style for less
+
 * .gitconfig
 > git global configurations
 
@@ -17,7 +23,7 @@ Dot Files Managements
 > subversion global configurations
 
 * .dircolors
-> directory colors resources
+> directory & file colors resources
 
 * .m2/
 > maven configurations
