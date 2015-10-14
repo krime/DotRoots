@@ -1,0 +1,2 @@
+VLOCK_MESSAGE="The tty of $(hostname) is now locked. Please press [ENTER] to unlock."
+VLOCK_BANNER=$HOME/.common/banners/kingsman.ascii

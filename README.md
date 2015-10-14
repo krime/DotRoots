@@ -13,6 +13,8 @@ Dot Files Managements
 * .common/.lessex
 > source-highlight style for less
 
+* .common/banners/kingsman.ascii
+
 * .gitconfig
 > git global configurations
 
@@ -49,3 +51,5 @@ Dot Files Managements
 * .vim/
 > vim plugins
 
+* .vlockrc
+> vlock resource file
