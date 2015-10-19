@@ -947,8 +947,6 @@ highlight QuickFix cterm=none term=none ctermbg=9
 augroup vimQuickFix
   au BufReadPost quickfix match QuickFix /\%1l/
   au BufReadPost quickfix nnoremap <buffer> <CR> :execute 'match QuickFix /\%' . line('.') . 'l/'<CR><CR>
-  au BufRead quickfix hi CursorLine cterm=none term=none
-  au BufRead quickfix hi Search cterm=none term=none ctermbg=none
 augroup end
 
 "command run !
