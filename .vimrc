@@ -901,12 +901,15 @@ hi SignBookmarkCol ctermfg=15 ctermbg=21 cterm=bold guifg=DarkBlue
 " guibg=#d0d0ff gui=bold
 " define a bookmark / sign: just highlight the line
 sign define SignBookmark text=<> linehl=SignBookmarkCol texthl=SignBookmarkCol
-"nnoremap <silent> <unique> <leader>mm :exe 'sign place 1000 name=SignBookmark line='.line(".").' buffer='.winbufnr(0)<CR>
-nnoremap <silent> <leader>mm :exe 'sign place 1000 name=SignBookmark line='.line(".").' buffer='.winbufnr(0)<CR>
-"nnoremap <silent> <unique> <leader>mh :sign unplace 1000<CR>
-nnoremap <silent> <leader>mh :sign unplace 1000<CR>
-"nnoremap <silent> <unique> <leader>ml :sign list<CR>
-nnoremap <silent> <leader>ml :sign list<CR>
+if (mapcheck("<leader>mm", "n")=='')
+  nnoremap <silent> <unique> <leader>mm :exe 'sign place 1000 name=SignBookmark line='.line(".").' buffer='.winbufnr(0)<CR>
+endif
+if (mapcheck("<leader>mh", "n")=='')
+  nnoremap <silent> <unique> <leader>mh :sign unplace 1000<CR>
+endif
+if (mapcheck("<leader>ml", "n")=='')
+  nnoremap <silent> <unique> <leader>ml :sign list<CR>
+endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Showmarks operation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -982,7 +985,7 @@ map <f3> :NERDTreeToggle<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:JIDE_tags_home = $HOME."/.vim/tags"
 
-highlight QuickFix cterm=bold,underline term=none ctermbg=9
+highlight QuickFix cterm=bold,underline term=none ctermbg=none
 augroup vimQuickFix
   au BufReadPost quickfix match QuickFix /\%1l/
   au BufReadPost quickfix nnoremap <buffer> <CR> :execute 'match QuickFix /\%' . line('.') . 'l/'<CR><CR>

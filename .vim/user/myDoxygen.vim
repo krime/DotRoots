@@ -8,6 +8,7 @@ augroup vimDoxyUtil
   autocmd!
   autocmd FileType c,cpp,java,javascript,php call s:SetCommentDelimiters('/**', '*/', '*')
   autocmd FileType bash,csh,sh,perl,python,ruby,conf call s:SetCommentDelimiters('###############', '###############', '#')
+  autocmd FileType vim call s:SetCommentDelimiters('"""""""""""""""', '"""""""""""""""', '"')
   autocmd FileType haskell call s:SetCommentDelimiters('{-', '-}', '--')
 
   let g:DoxygenToolkit_authorName="Krime Lam<krimelam@gmail.com>" 
