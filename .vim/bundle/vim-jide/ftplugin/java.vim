@@ -83,5 +83,7 @@ endfunction
 
 noremap <Leader>ji :call InsertImport()<CR>
 noremap <Leader>jp :call InsertPackage()<CR>
+noremap <Leader>jc :make! compile<cr>
+noremap <Leader>jm :make! package<cr>
 noremap <Leader>jt :!ctags -R s:maven_prefix<CR> 
 
