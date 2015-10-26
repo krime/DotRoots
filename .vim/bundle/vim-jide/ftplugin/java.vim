@@ -59,7 +59,7 @@ function! InsertPackage()
   let l:package = substitute(l:package,'/'.l:filename.'$','','')
   let l:package = substitute(l:package,'/','.','g')
   G
-  call feedkeys("Opackage ".l:package.";\<CR>\<ESC>", 't')
+  call feedkeys("Opackage ".l:package.";\<ESC>", 't')
 endfunction
 
 function! InsertImport()
@@ -74,7 +74,7 @@ function! InsertImport()
       G
       call search("^\s*import","b")
       "feedkeys is executed at the end, so go back must be invoked inside feedkeys
-      call feedkeys("oimport \<C-R>=CompleteImport('".word."')\<CR>", 't')
+      call feedkeys("oimport \<C-R>=CompleteImport('".word."');\<CR>", 't')
    else
       echo "class already imported"
       call setpos('.', save_cursor)
@@ -85,5 +85,6 @@ noremap <Leader>ji :call InsertImport()<CR>
 noremap <Leader>jp :call InsertPackage()<CR>
 noremap <Leader>jc :make! compile<cr>
 noremap <Leader>jm :make! package<cr>
+noremap <Leader>ju :make! test<cr>
 noremap <Leader>jt :!ctags -R s:maven_prefix<CR> 
 

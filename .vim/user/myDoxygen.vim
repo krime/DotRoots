@@ -5,6 +5,7 @@
 " let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------" 
 
 augroup vimDoxyUtil
+  autocmd!
   autocmd FileType c,cpp,java,javascript,php call s:SetCommentDelimiters('/**', '*/', '*')
   autocmd FileType bash,csh,sh,perl,python,ruby,conf call s:SetCommentDelimiters('###############', '###############', '#')
   autocmd FileType haskell call s:SetCommentDelimiters('{-', '-}', '--')
@@ -42,7 +43,7 @@ augroup vimDoxyUtil
   let g:DoxygenToolkit_licenseTag=printf("%s", s:merchLicenseTag)
 augroup END
 
-function s:SetCommentDelimiters(startTag, endTag, blockTag)
+function! s:SetCommentDelimiters(startTag, endTag, blockTag)
   let l:commentWrap = 80
   let g:DoxygenToolkit_startCommentTag      = a:startTag." "
   let g:DoxygenToolkit_startCommentBlock    = a:startTag.repeat(a:blockTag,l:commentWrap/len(a:blockTag))." "

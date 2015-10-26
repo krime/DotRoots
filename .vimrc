@@ -317,7 +317,7 @@ inoremap <s-tab> <c-n>
 :inoremap [ []<ESC>i
 :inoremap ] <c-r>=ClosePair(']')<CR>
 
-function ClosePair(char)
+function! ClosePair(char)
   if getline('.')[col('.')-1]==a:char
     return "\<Right>"
   else
@@ -659,7 +659,7 @@ hi TurboHeadCurrent ctermfg=226 ctermbg=24 cterm=bold
 hi TurboHeadOthers ctermfg=248 ctermbg=236 cterm=underline
 hi TurboHeadBarLine ctermfg=234 ctermbg=234
 
-function ShortTabLine()
+function! ShortTabLine()
   let ret = ''
   let lsp = ''
   let rsp = ''
@@ -706,7 +706,7 @@ function ShortTabLine()
   return ret
 endfunction
 
-function LongTabLine()
+function! LongTabLine()
   let ret = ''
   let lsp = ''
   let rsp = ''
@@ -901,9 +901,12 @@ hi SignBookmarkCol ctermfg=15 ctermbg=21 cterm=bold guifg=DarkBlue
 " guibg=#d0d0ff gui=bold
 " define a bookmark / sign: just highlight the line
 sign define SignBookmark text=<> linehl=SignBookmarkCol texthl=SignBookmarkCol
-nmap <silent> <unique> <leader>mm :exe 'sign place 1000 name=SignBookmark line='.line(".").' buffer='.winbufnr(0)<CR>
-nmap <silent> <unique> <leader>mh :sign unplace 1000<CR>
-nmap <silent> <unique> <leader>ml :sign list<CR>
+"nnoremap <silent> <unique> <leader>mm :exe 'sign place 1000 name=SignBookmark line='.line(".").' buffer='.winbufnr(0)<CR>
+nnoremap <silent> <leader>mm :exe 'sign place 1000 name=SignBookmark line='.line(".").' buffer='.winbufnr(0)<CR>
+"nnoremap <silent> <unique> <leader>mh :sign unplace 1000<CR>
+nnoremap <silent> <leader>mh :sign unplace 1000<CR>
+"nnoremap <silent> <unique> <leader>ml :sign list<CR>
+nnoremap <silent> <leader>ml :sign list<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Showmarks operation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
