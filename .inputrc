@@ -43,6 +43,10 @@
 "\eOH": beginning-of-line
 "\eOF": end-of-line
 
+# Customize
+"\C-x\C-p": history-search-backward
+"\C-x\C-n": history-search-forward 
+
 # Use Menu Complete
 TAB: complete
 "\e[Z": "\e-i\C-i"
