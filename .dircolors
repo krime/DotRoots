@@ -66,23 +66,35 @@ TERM xterm-debian
 # Attribute codes:
 # 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
 # Text color codes:
-# 30=black 31=red 32=green 33=yellow 34=blue 33;44=magenta 36=cyan 37=white
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
-#NORMAL 00 # no color code at all
-#FILE 00 # regular file: use no color at all
-RESET 0 # reset to "normal" color
+# 256 color set
+# Text & Background
+# 38;05=foreground 48;05=background
+# Dim colors:
+# 0=black 1=red 2=green 3=yellow 4=blue 5=magenta 6=cyan 7=white
+# Bright colors:
+# 8=black 9=red 10=green 11=yellow 12=blue 13=magenta 14=cyan 15=white
+# RGB 216 colors codes
+# R=[0,5], G=[0,5], B=[0,5]
+# Gray Scale 25 colors codes
+# 232=Black 255=White
+
+RESET 00 # reset to "normal" color
+NORMAL 01;37 # no color code at all
+FILE 01;37 # regular file: use no color at all
 DIR 01;33 # directory
 LINK 01;36 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
 FIFO 01;32;40 # pipe
-SOCK 01;36 # socket
+SOCK 01;36;40 # socket
 DOOR 01;33;44 # door
-BLK 01;31;40 # block device driver
-CHR 01;31;40 # character device driver
-ORPHAN 01;05;37;41 # orphaned syminks
-MISSING 01;05;37;41 # ... and the files they point to
+BLK 01;92;40 # block device driver
+CHR 01;94;40 # character device driver
+ORPHAN 01;05;91 # orphaned syminks
+MISSING 01;05;91 # ... and the files they point to
 SETUID 41;37 # file that is setuid (u+s)
 SETGID 43;30 # file that is setgid (g+s)
 CAPABILITY 41;30 # file with capability
@@ -95,16 +107,10 @@ EXEC 01;48;5;22;38;5;46
 # to colorize below. Put the extension, a space, and the color init string.
 # (and any comments you want to add after a '#')
 # If you use DOS-style suffixes, you may want to uncomment the following:
-#.cmd 01;32 # executables (bright green)
-#.exe 01;32
-#.com 01;32
-#.btm 01;32
-#.bat 01;32
 # Or if you want to colorize scripts even if they do not have the
-# executable bit actually set.
-#.sh 01;32
-#.csh 01;32
- # archives or compressed (bright red)
+# executables
+
+# archives or compressed (bright red)
 .tar 01;31
 .tgz 01;31
 .arj 01;31
@@ -242,6 +248,7 @@ EXEC 01;48;5;22;38;5;46
 .cfg 01;38;05;130
 .ini 01;38;05;130
 .bat 01;38;05;130
+.btm 01;38;05;130
 .cmd 01;38;05;130
 .gyp 01;38;05;130
 .ninja 01;38;05;130

@@ -82,7 +82,8 @@
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 
-" This is Gary Bernhardt's .vimrc file
+" This is Kingsley Lam's .vimrc file
+
 set ts=2
 set sts=2
 set sw=2
@@ -161,6 +162,7 @@ set incsearch
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,GB18030,cp936,big5,euc-jp,euc-kr,latin1
+set fileformats=unix,dos
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase
 set smartcase
