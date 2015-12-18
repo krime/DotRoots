@@ -212,51 +212,51 @@ set number
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vimrcEx
   " Clear all autocmds in the group
-  autocmd!
-  autocmd FileType text setlocal textwidth=80
+  au!
+  au FileType text setlocal textwidth=80
   " Jump to last cursor position unless it's invalid or in an event handler
-  autocmd BufReadPost *
+  au BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
 
   "Some simple config 150803
-  autocmd FileType *      set formatoptions=tcql nocindent comments&
-  autocmd FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,ex:*/,://
-  autocmd FileType c,cpp  ab #d #define
-  autocmd FileType c,cpp  ab #i #include
-  autocmd FileType c,cpp  ab #b /*******************************************************************************
-  autocmd FileType c,cpp  ab #e *******************************************************************************/
-  autocmd FileType c,cpp  ab #l /******************************************************************************/
+  au FileType *      set formatoptions=tcql nocindent comments&
+  au FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,ex:*/,://
+  au FileType c,cpp  ab #d #define
+  au FileType c,cpp  ab #i #include
+  au FileType c,cpp  ab #b /*******************************************************************************
+  au FileType c,cpp  ab #e *******************************************************************************/
+  au FileType c,cpp  ab #l /******************************************************************************/
 
   "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType perl,ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType python set sw=2 sts=2 et omnifunc=pythoncomplete
+  au FileType perl,ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+  au FileType python set sw=2 sts=2 et omnifunc=pythoncomplete
 
-  autocmd FileType javascript set omnifunc=javascriptcomplete
-  autocmd FileType html set omnifunc=htmlcomplete
-  autocmd FileType css set omnifunc=csscomplete
-  autocmd FileType xml set omnifunc=xmlcomplete
-  autocmd FileType php set omnifunc=phpcomplete
+  au FileType javascript set omnifunc=javascriptcomplete
+  au FileType html set omnifunc=htmlcomplete
+  au FileType css set omnifunc=csscomplete
+  au FileType xml set omnifunc=xmlcomplete
+  au FileType php set omnifunc=phpcomplete
 
-  autocmd FileType c set omnifunc=ccomplete
-  autocmd FileType java set omnifunc=javacomplete#Complete
+  au FileType c set omnifunc=ccomplete
+  au FileType java set omnifunc=javacomplete#Complete
 
-  autocmd! BufRead,BufNewFile *.sass setfiletype sass 
+  au BufRead,BufNewFile *.sass setfiletype sass 
 
-  autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
-  autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
+  au BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
+  au BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
 
   " Indent p tags
-  autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
+  au FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
 
   " Don't syntax highlight markdown because it's often wrong
-  autocmd! FileType mkd setlocal syn=off
+  au FileType mkd setlocal syn=off
 
   " Leave the return key alone when in command line windows, since it's used
   " to run commands there.
-  autocmd! CmdwinEnter * :unmap <cr>
-  autocmd! CmdwinLeave * :call MapCR()
+  au CmdwinEnter * :unmap <cr>
+  au CmdwinLeave * :call MapCR()
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -761,18 +761,18 @@ set tabline=%!LongTabLine()
 " Edit operations
 "imap <c-j> <cr>
 "imap <c-m> <cr>
-imap <c-h> <bs>
-imap <c-d> <del>
+"imap <c-h> <bs>
+"imap <c-d> <del>
 " Navigate operations
 "imap <c-f> <right>
 "imap <c-b> <left>
-imap <c-a> <home>
-imap <c-e> <end>
+"imap <c-a> <home>
+"imap <c-e> <end>
 " Yank & Paste
-imap <c-u> <esc>d0s
-imap <c-k> <esc>Da
-imap <c-y> <esc>pa
-imap <c-t> <esc>xp
+"imap <c-u> <esc>d0s
+"imap <c-k> <esc>Da
+"imap <c-y> <esc>pa
+"imap <c-t> <esc>xp
 
 " Edit operations
 "cmap <c-j> <cr>
@@ -940,16 +940,18 @@ let g:xptemplate_key = '<c-\>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ftplugin_sql_omni_key = '<c-s>'
 augroup vimSQL
-  autocmd FileType sql syn clear
-  autocmd FileType sql so ~/.vim/syntax/sql.vim
+  au!
+  au FileType sql syn clear
+  au FileType sql so ~/.vim/syntax/sql.vim
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " JSP Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vimJSP
-  autocmd FileType jsp syn clear
-  autocmd FileType jsp so ~/.vim/syntax/jsp.vim
+  au!
+  au FileType jsp syn clear
+  au FileType jsp so ~/.vim/syntax/jsp.vim
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -968,7 +970,8 @@ inoremap <c-g><c-c> <esc>:exe 'r ! echo -en '.expand('%:t:r')<cr>
 " Markdown Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vimMD
-  au! bufread,bufnewfile *.md set filetype=markdown syntax=markdown
+  au!
+  au bufread,bufnewfile *.md set filetype=markdown syntax=markdown
 augroup end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -989,8 +992,25 @@ let g:JIDE_tags_home = $HOME."/.vim/tags"
 
 highlight QuickFix cterm=bold,underline term=none ctermbg=none
 augroup vimQuickFix
+  au!
   au BufReadPost quickfix match QuickFix /\%1l/
   au BufReadPost quickfix nnoremap <buffer> <CR> :execute 'match QuickFix /\%' . line('.') . 'l/'<CR><CR>
 augroup end
 
 "command run !
+"set ep="astyle -v -c --mode=c -xG -w -A14 -s2 -z2 %"
+
+let mapleader=","
+iab @@ krimelam@gmail.com
+iab ccopy Copyright (C) 2015-2016, trapg.com.
+
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+
+onoremap <leader>n( :<c-u>normal! f(vi(<cr>
+onoremap <leader>l( :<c-u>normal! F)vi(<cr>
+
+augroup vimOPMap
+  au!
+  "au BufRead onoremap <leader>n( :<c-u>execute normal! f(vi(<cr>
+  "onoremap <leader>l( :<c-u>normal! F)vi(<cr>
+augroup end

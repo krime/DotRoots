@@ -18,7 +18,7 @@ hi CursorColumn ctermfg=NONE ctermbg=23 cterm=NONE guifg=NONE guibg=#2e373b gui=
 hi ColorColumn ctermfg=NONE ctermbg=23 cterm=NONE guifg=NONE guibg=#2e373b gui=NONE
 hi LineNr ctermfg=15 ctermbg=236 cterm=NONE guifg=#84898c guibg=#2a343a gui=NONE
 hi VertSplit ctermfg=59 ctermbg=59 cterm=NONE guifg=#252c31 guibg=#252c31 gui=NONE
-hi MatchParen ctermfg=227 ctermbg=NONE cterm=inverse guifg=#dda790 guibg=NONE gui=underline
+hi MatchParen ctermfg=75 ctermbg=NONE cterm=inverse guifg=#dda790 guibg=NONE gui=underline
 hi StatusLine ctermfg=231 ctermbg=59 cterm=bold guifg=#f0f0f0 guibg=#575e61 gui=bold
 hi StatusLineNC ctermfg=231 ctermbg=59 cterm=NONE guifg=#f0f0f0 guibg=#575e61 gui=NONE
 hi Pmenu ctermfg=153 ctermbg=NONE cterm=NONE guifg=#bcdbff guibg=NONE gui=NONE
@@ -57,7 +57,7 @@ hi Special ctermfg=28 ctermbg=NONE cterm=NONE guifg=#f0f0f0 guibg=NONE gui=NONE
 hi SpecialComment ctermfg=28 ctermbg=NONE cterm=NONE guifg=#f0f0f0 guibg=NONE gui=NONE
 hi SpecialConstant ctermfg=22 ctermbg=NONE cterm=NONE guifg=#f0f0f0 guibg=NONE gui=NONE
 " hi SpecialKey ctermfg=227 ctermbg=23 cterm=NONE guifg=#414e58 guibg=#252c31 gui=NONE
-hi SpecialKey ctermfg=234 ctermbg=232 cterm=NONE guifg=#414e58 guibg=#252c31 gui=NONE
+hi SpecialKey ctermfg=243 ctermbg=232 cterm=NONE guifg=#414e58 guibg=#252c31 gui=NONE
 hi Statement ctermfg=227 ctermbg=NONE cterm=NONE guifg=#dda790 guibg=NONE gui=NONE
 hi StorageClass ctermfg=84 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
 hi MethodClass ctermfg=154 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
