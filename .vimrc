@@ -94,6 +94,7 @@ set visualbell
 set noerrorbells
 set dir=~/tmp/vim
 set listchars=tab:››,trail:·,eol:¶,extends:▶,precedes:◀
+"set ambiwidth=double
 
 " -- omnicppcomplete setting --
 set tags+=$HOME/.vim/tags/c.tags
@@ -112,6 +113,7 @@ set tags+=tags/tags
 map <C-F12> :!ctags --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q -L config/list -f tags/ctags/tags
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,longest,preview,menu
+" Also load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
 let OmniCpp_MayCompleteDot = 1 " autocomplete with .
 let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
@@ -133,6 +135,7 @@ call pathogen#incubate()
 set nocompatible
 " allow unsaved background buffers and remember marks/undo for them
 set hidden
+set bh=hide
 " remember more commands and search history
 set history=100000
 set undolevels=100000
@@ -161,6 +164,7 @@ set incsearch
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,GB18030,cp936,big5,euc-jp,euc-kr,latin1
+set fileformats=unix,dos
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase
 set smartcase
@@ -191,10 +195,9 @@ syntax on
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
-" Also load indent files, to automatically do language-dependent indenting.
-filetype plugin indent on
 " use emacs-style tab completion when selecting files, etc
-set wildmode=longest,list
+"set wildmode=longest,list:full
+set wildmode=longest,full
 " make tab completion for files/buffers act like bash
 set wildmenu
 set wildignore+=*.o,*.a,*.so,*.obj,*.exe,*.class,*.swp,*.swo,*.pyc,*.elc,*.lib,*.ncb,*.opt,*.plg,.svn,.git,.hg,CVS
