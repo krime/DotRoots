@@ -43,7 +43,7 @@
 "\eOH": beginning-of-line
 "\eOF": end-of-line
 
-# Customize
+# Costomize
 "\C-x\C-p": history-search-backward
 "\C-x\C-n": history-search-forward 
 
@@ -52,6 +52,7 @@ TAB: complete
 "\e[Z": "\e-i\C-i"
 "\C-x\C-[": menu-complete
 "\C-x\C-]": menu-complete-backward
+#"\C-x\C-r": re-read-init-file
 
 # Arrow keys in ANSI mode
 "\M-[D": backward-word
@@ -64,6 +65,8 @@ set meta-flag on
 set convert-meta off
 set input-meta on
 set output-meta on
+set colored-stats on
+set show-mode-in-prompt on
 $if Bash
   # Don't ring bell on completion
   set bell-style none
