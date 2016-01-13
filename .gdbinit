@@ -68,6 +68,8 @@ set $SHOWCPUREGISTERS = 1
 set $SHOWSTACK = 1
 # set to 1 to enable display of data window (default is 0)
 set $SHOWDATAWIN = 1
+# set to 1 to enable display of code window (default is 0)
+set $SHOWCODEWIN = 1
 # set to 0 to disable coloured display of changed registers
 set $SHOWREGCHANGES = 1
 # set to 1 so skip command to execute the instruction at the new location
@@ -136,7 +138,7 @@ shell mkfifo /tmp/colorStopPipe
 
 define hook-list
   #echo \n
-  shell cat /tmp/colorListPipe | /usr/bin/source-highlight -s cc --failsafe -f esc --style-file=krime.style | sed "6s@^@$(tput rev)@" &
+  shell cat /tmp/colorListPipe | /usr/bin/source-highlight -s cc --failsafe -f esc --style-file=kings.style | sed "6s@^@$(tput rev)@" &
   set logging redirect on
   set logging on /tmp/colorListPipe
 end
@@ -181,7 +183,7 @@ define hook-displaycode
   echo \033[34m\033[1m
   printf "[code]\n"
   echo \033[0m
-  shell cat /tmp/colorDumpPipe | c++filt | /usr/bin/source-highlight -s asm --failsafe -f esc --style-file=krime.style &
+  shell cat /tmp/colorDumpPipe | c++filt | /usr/bin/source-highlight -s asm --failsafe -f esc --style-file=kings.style &
   set logging redirect on
   set logging on /tmp/colorDumpPipe
 end
@@ -2331,7 +2333,9 @@ define context
     datawin
   end
 
-  displaycode
+  if $SHOWCODEWIN == 1
+    displaycode
+  end
   echo \033[34m
   printf "--------------------------------------------------------------------------------"
   if ($64BITS == 1)
@@ -3555,6 +3559,14 @@ Enable display of data window in the context window.
 end
 
 
+define enablecodewin
+  set $SHOWCODEWIN = 1
+end
+document enablecodewin
+Enable display of code window in the context window.
+end
+
+
 # disable commands for different displays
 define disableobjectivec
   set $SHOWOBJECTIVEC = 0
@@ -3585,6 +3597,14 @@ define disabledatawin
 end
 document disabledatawin
 Disable display of data window in the context window.
+end
+
+
+define disablecodewin
+  set $SHOWCODEWIN = 0
+end
+document disablecodewin
+Disable display of code window in the context window.
 end
 
 
