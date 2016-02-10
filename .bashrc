@@ -60,7 +60,7 @@ export LESS_TERMCAP_so=$'\E[0m\E[1m\E[48;5;033m\E[38;5;226m'  # begin standout-m
 export LESS_TERMCAP_ue=$'\E[0m\E[1m\E[38;5;226m'              # end underline
 export LESS_TERMCAP_us=$'\E[0m\E[4m\E[38;5;063m'              # begin underline
 if [ -f ~/.less_style ]; then
-  export LESSOPEN="| /usr/bin/source-highlight -n -t2 --failsafe --infer-lang -f esc --style-file=~/.common/.lessex -i %s"
+  export LESSOPEN="| /usr/bin/source-highlight -n -t2 --failsafe --infer-lang -f esc --style-file=$HOME/.common/.lessex -i %s"
 else
   export LESSOPEN="| /usr/bin/source-highlight -n -t2 --failsafe --infer-lang -f esc -i %s"
 fi
@@ -121,7 +121,12 @@ __EOF__
 )
 
 export TERM=xterm-256color
-export PS1='\[\n\e[01;37m\]\u@\[\e[4m\e[38;5;246m\]\h>\[\e[0m\e[01;33m\][ \W ] \[\e[0m\e[1;37m\]\n\$ '
+if ( declare -f lastexit &> /dev/null ); then
+  PS1='\[\n\e[01;37m\]\u@\[\e[4m\e[38;5;246m\]\h>\[\e[0m\e[01;33m\][ \W ] \[\e[0m\e[1;37m\]\n\$ '
+else
+  PS1='\[\n\e[01;37m\]\u@\[\e[4m\e[38;5;246m\]\h>\[\e[0m\e[01;33m\][ \W ] \[\e[01;38;5;87m\]$(lastexit $?)\[\e[0m\e[1;37m\]\n\$ '
+fi
+export PS1
 
 # History Configuration
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
