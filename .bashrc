@@ -59,13 +59,15 @@ export LESS_TERMCAP_se=$'\E[0m\E[1m\E[38;5;15m'               # end standout-mod
 export LESS_TERMCAP_so=$'\E[0m\E[1m\E[48;5;033m\E[38;5;226m'  # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m\E[1m\E[38;5;226m'              # end underline
 export LESS_TERMCAP_us=$'\E[0m\E[4m\E[38;5;063m'              # begin underline
-if [ -f ~/.less_style ]; then
+if [ -f $HOME/.common/.lessex ]; then
   export LESSOPEN="| /usr/bin/source-highlight -n -t2 --failsafe --infer-lang -f esc --style-file=$HOME/.common/.lessex -i %s"
 else
   export LESSOPEN="| /usr/bin/source-highlight -n -t2 --failsafe --infer-lang -f esc -i %s"
 fi
 #export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
 export LESS=' -R -M --shift 5 '
+#export LESSCHARSET=iso8859
+export LESSCHARSET=utf-8
 #export LESS=' -R '
 export GROFF_NO_SGR=1
 
@@ -139,120 +141,288 @@ export HISTIGNORE=$HISTWRONG:'pwd:sl:ls:ps:cd:fg*:exit:poweroff:reboot:date:w:wh
 
 export EDITOR='/usr/bin/vim'
 
+if [ -e /apps/docker ]; then
+  export DOCKER_HOME=/apps/docker
+  export PATH=$DOCKER_HOME/bin:$PATH
+fi
+
 # export GASNET_SPAWNFN=S
 # export GASNET_SSH_SERVERS="c1 c2"
 
 # Perl Module Paths
-export PERL_HOME=/opt/apps/perl5
-export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:$PERL_HOME";
-export PERL_MB_OPT="--install_base $PERL_HOME"
-export PERL_MM_OPT="INSTALL_BASE=$PERL_HOME"
-export PERL5LIB="$PERL_HOME/lib/perl5/x86_64-linux:$PERL_HOME/lib/perl5:$PERL5LIB"
-export PERLLIB=$PERL5LIB
-export PATH="$PERL_HOME/bin:$PATH"
-export PERLBREW_ROOT=/opt/apps/perlbrew
-[ -f $PERLBREW_ROOT/etc/bashrc ] && source $PERLBREW_ROOT/etc/bashrc
+if [ -e /apps/perl5 ]; then
+  export PERL_HOME=/apps/perl5
+  export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:$PERL_HOME";
+  export PERL_MB_OPT="--install_base $PERL_HOME"
+  export PERL_MM_OPT="INSTALL_BASE=$PERL_HOME"
+  export PERL5LIB="$PERL_HOME/lib/perl5/x86_64-linux:$PERL_HOME/lib/perl5:$PERL5LIB"
+  export PERLLIB=$PERL5LIB
+  export PATH="$PERL_HOME/bin:$PATH"
+  export PERLBREW_ROOT=/apps/perlbrew
+  [ -f $PERLBREW_ROOT/etc/bashrc ] && source $PERLBREW_ROOT/etc/bashrc
+fi
 
 export JAVA_HOME=/usr/java/latest
 
 # ANT
-export ANT_HOME=/opt/ant
-export ANT_OPTS=
-export PATH=$ANT_HOME/bin:$PATH
+if [ -e /apps/ant ]; then
+  export ANT_HOME=/apps/ant
+  export ANT_OPTS=
+  export PATH=$ANT_HOME/bin:$PATH
+fi
 
 # MAVEN
-export M2_HOME=/opt/maven
-export M2=$M2_HOME/bin
-export MAVEN_OPTS='-Xms256m -Xmx512m'
-export PATH=$M2:$PATH
+if [ -e /apps/maven ]; then
+  export M2_HOME=/apps/maven
+  export M2=$M2_HOME/bin
+  export MAVEN_OPTS='-Xms256m -Xmx512m -Xss4m'
+  export PATH=$M2:$PATH
+fi
 
 # JETTY
-export JETTY_HOME=/opt/jetty
-export PATH=$JETTY_HOME/bin:$PATH
+if [ -e /apps/jetty ]; then
+  export JETTY_HOME=/apps/jetty
+  export PATH=$JETTY_HOME/bin:$PATH
+fi
 
 # TAG UTILITY
-export CTAGS_HOME=/opt/ctags
-export GTAGS_HOME=/opt/global
-export CSCOPE_HOME=/opt/cscope
-export IDUTILS_HOME=/opt/idutils
-export PATH=$CTAGS_HOME/bin:$GTAGS_HOME/bin:$CSCOPE_HOME/bin:$IDUTILS_HOME/bin:$PATH
+if [ -e /apps/tags ]; then
+  export CTAGS_HOME=/apps/ctags
+  export GTAGS_HOME=/apps/global
+  export CSCOPE_HOME=/apps/cscope
+  export IDUTILS_HOME=/apps/idutils
+  export PATH=$CTAGS_HOME/bin:$GTAGS_HOME/bin:$CSCOPE_HOME/bin:$IDUTILS_HOME/bin:$PATH
+fi
 
 # NODEJS
-export NODE_HOME=/apps/node
-export PATH=$NODE_HOME/bin:$PATH
+if [ -e /apps/node ]; then
+  export NODE_HOME=/apps/node
+  export PATH=$NODE_HOME/bin:$PATH
+fi
 
 # NGINX
-export NGINX_HOME=/apps/nginx
-export PATH=$NGINX_HOME/sbin:$PATH
+if [ -e /apps/nginx ]; then
+  export NGINX_HOME=/apps/nginx
+  export PATH=$NGINX_HOME/sbin:$PATH
+fi
 
 # Google Performance Tools
-export COMMON_HOME=/opt/local
-export CPATH=$COMMON_HOME/include:$CPATH
-export LD_LIBRARY_PATH=$COMMON_HOME/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=$COMMON_HOME/lib:$LIBRARY_PATH
-export PKG_CONFIG_PATH=$COMMON_HOME/lib/pkgconfig/:$PKG_CONFIG_PATH
-export PATH=$COMMON_HOME/bin:$PATH
+if [ -e /apps/local ]; then
+  export COMMON_HOME=/apps/local
+  export CPATH=$COMMON_HOME/include:$CPATH
+  export LD_LIBRARY_PATH=$COMMON_HOME/lib:$LD_LIBRARY_PATH
+  export LIBRARY_PATH=$COMMON_HOME/lib:$LIBRARY_PATH
+  export PKG_CONFIG_PATH=$COMMON_HOME/lib/pkgconfig:$PKG_CONFIG_PATH
+  export PATH=$COMMON_HOME/bin:$PATH
+  ## C,CC,GCC
+  export C_INCLUDE_PATH=$CPATH
+  ## MANPAGE
+  export MANPATH=$MANPATH:/apps/local/share/man
+fi
 
 # Redis
-export REDIS_HOME=/opt/redis
-export PATH=$REDIS_HOME/bin:$PATH
+if [ -e /apps/redis ]; then
+  export REDIS_HOME=/apps/redis
+  export PATH=$REDIS_HOME/bin:$PATH
+fi
 
 # Scons
-export SCONS_HOME=/opt/scons
-export PATH=$SCONS_HOME/bin:$PATH
+if [ -e /apps/scons ]; then
+  export SCONS_HOME=/apps/scons
+  export PATH=$SCONS_HOME/bin:$PATH
+fi
 
 # Apache Portable Runtime
-export APR_HOME=/opt/apr
-export PATH=$APR_HOME/bin:$PATH
-export CPATH=$APR_HOME/include:$CPATH
-export LD_LIBRARY_PATH=$APR_HOME/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=$APR_HOME/lib:$LIBRARY_PATH
-export PKG_CONFIG_PATH=$APR_HOME/lib/pkgconfig/:$PKG_CONFIG_PATH
+if [ -e /apps/apr ]; then
+  export APR_HOME=/apps/apr
+  export PATH=$APR_HOME/bin:$PATH
+  export CPATH=$APR_HOME/include:$CPATH
+  export LD_LIBRARY_PATH=$APR_HOME/lib:$LD_LIBRARY_PATH
+  export LIBRARY_PATH=$APR_HOME/lib:$LIBRARY_PATH
+  export PKG_CONFIG_PATH=$APR_HOME/lib/pkgconfig/:$PKG_CONFIG_PATH
+fi
 
 # Serf
-export SERF_HOME=/opt/serf
-export CPATH=$SERF_HOME/include:$CPATH
-export LD_LIBRARY_PATH=$SERF_HOME/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=$SERF_HOME/lib:$LIBRARY_PATH
+if [ -e /apps/serf ]; then
+  export SERF_HOME=/apps/serf
+  export CPATH=$SERF_HOME/include:$CPATH
+  export LD_LIBRARY_PATH=$SERF_HOME/lib:$LD_LIBRARY_PATH
+  export LIBRARY_PATH=$SERF_HOME/lib:$LIBRARY_PATH
+fi
 
 # Neon
-export NEON_HOME=/opt/neon
-export PATH=$NEON_HOME/bin:$PATH
-export CPATH=$NEON_HOME/include:$CPATH
-export LD_LIBRARY_PATH=$NEON_HOME/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=$NEON_HOME/lib:$LIBRARY_PATH
-export PKG_CONFIG_PATH=$NEON_HOME/lib/pkgconfig/:$PKG_CONFIG_PATH
+if [ -e /apps/neon ]; then
+  export NEON_HOME=/apps/neon
+  export PATH=$NEON_HOME/bin:$PATH
+  export CPATH=$NEON_HOME/include:$CPATH
+  export LD_LIBRARY_PATH=$NEON_HOME/lib:$LD_LIBRARY_PATH
+  export LIBRARY_PATH=$NEON_HOME/lib:$LIBRARY_PATH
+  export PKG_CONFIG_PATH=$NEON_HOME/lib/pkgconfig/:$PKG_CONFIG_PATH
+fi
 
 # MongoDB
-export MONGO_HOME=/opt/mongodb
-export PATH=$MONGO_HOME/bin:$PATH
+if [ -e /apps/mongodb ]; then
+  export MONGO_HOME=/apps/mongodb
+  export PATH=$MONGO_HOME/bin:$PATH
+fi
 
 # HTTPD
-export HTTPD_HOME=/opt/httpd
-export PATH=$HTTPD_HOME/bin:$PATH
+if [ -e /apps/httpd ]; then
+  export HTTPD_HOME=/apps/httpd
+  export PATH=$HTTPD_HOME/bin:$PATH
+fi
 
 # TagsUtils
-export TAGS_HOME=/opt/tagsutils
-export PATH=$TAGS_HOME/bin:$PATH
+if [ -e /apps/tagutils ]; then
+  export TAGS_HOME=/apps/tagsutils
+  export PATH=$TAGS_HOME/bin:$PATH
+fi
 
 # Gradle
-export GRADLE_HOME=/opt/gradle
-export PATH=$GRADLE_HOME/bin:$PATH
+if [ -e /apps/gradle ]; then
+  export GRADLE_HOME=/apps/gradle
+  export PATH=$GRADLE_HOME/bin:$PATH
+fi
 
 # SVNKIT
-export SVNKIT_HOME=/opt/svnkit
-export PATH=$SVNKIT_HOME/bin:$PATH
+if [ -e /apps/svnkit ]; then
+  export SVNKIT_HOME=/apps/svnkit
+  export PATH=$SVNKIT_HOME/bin:$PATH
+fi
 
 # JGIT
-export JGIT_HOME=/opt/jgit
-export PATH=$JGIT_HOME:$PATH
+if [ -e /apps/jgit ]; then
+  export JGIT_HOME=/apps/jgit
+  export PATH=$JGIT_HOME:$PATH
+fi
+
+# ZABBIX
+if [ -e /apps/zabbix ]; then
+  export JGIT_HOME=/apps/jgit
+  export PATH=$JGIT_HOME:$PATH
+fi
 
 # RLWRAP
-export RLWRAP_HOME=/opt/rlwrap
-export PATH=$RLWRAP_HOME/bin:$PATH
+if [ -e /apps/rlwrap ]; then
+  export RLWRAP_HOME=/apps/rlwrap
+  export PATH=$RLWRAP_HOME/bin:$PATH
+fi
 
 # Java Common Source Code
-export JAVA_SRC_HOME=/opt/srcs
-export J2SE_SRC=$JAVA_SRC_HOME/j2se
-export J2EE_SRC=$JAVA_SRC_HOME/j2ee
-export JAVA_SRC_PATH=$J2SE_SRC:$J2EE_SRC
+if [ -e /apps/srcs ]; then
+  export JAVA_SRC_HOME=/apps/srcs
+  export J2SE_SRC=$JAVA_SRC_HOME/j2se
+  export J2EE_SRC=$JAVA_SRC_HOME/j2ee
+  export JAVA_SRC_PATH=$J2SE_SRC:$J2EE_SRC
+fi
+
+# ZOOKEEPER
+if [ -e /apps/zookeeper ]; then
+  export ZK_HOME=/apps/zookeeper
+  export PATH=$ZK_HOME/bin:$PATH
+fi
+
+# ROCKETMQ
+if [ -e /apps/rocketmq ]; then
+  export ROCKETMQ_HOME=/apps/rocketmq
+  export PATH=$ROCKETMQ_HOME/bin:$PATH
+fi
+
+# JSTORM
+if [ -e /apps/jstorm ]; then
+  export JSTORM_HOME=/apps/jstorm
+  export JSTORM_CONF_DIR=$JSTORM_HOME/conf
+  export PATH=$JSTORM_HOME/bin:$PATH
+fi
+
+# PROTOBUF
+if [ -e /apps/protobuf ]; then
+  export PROTOBUF_HOME=/apps/protobuf
+  export PATH=$PROTOBUF_HOME/bin:$PATH
+  export CPATH=$PROTOBUF_HOME/include:$CPATH
+  export LD_LIBRARY_PATH=$PROTOBUF_HOME/lib:$LD_LIBRARY_PATH
+  export LIBRARY_PATH=$PROTOBUF_HOME/lib:$LIBRARY_PATH
+  export PKG_CONFIG_PATH=$PROTOBUF_HOME/lib/pkgconfig:$PKG_CONFIG_PATH
+fi
+
+# GEM
+if [ -e /apps/gem ]; then
+  export GEM_HOME=/apps/gem
+  export PATH=$GEM_HOME/bin:$PATH
+fi
+
+# PHP
+if [ -e /apps/php ]; then
+  export PHP_HOME=/apps/php
+  export PATH=$PHP_HOME/bin:$PHP_HOME/sbin:$PATH
+fi
+
+# PYTHON3
+if [ -e /apps/python3 ]; then
+  export PYTHON3_HOME=/apps/python3
+  export PATH=$PYTHON3_HOME/bin:$PATH
+  #export PYTHONPATH=$PYTHON3_HOME/lib/python3.5/site-packages
+  export PKG_CONFIG_PATH=$PYTHON3_HOME/lib/pkgconfig:$PKG_CONFIG_PATH
+  export CPATH=$PYTHON3_HOME/include:$CPATH
+  export LD_LIBRARY_PATH=$PYTHON3_HOME/lib:$LD_LIBRARY_PATH
+  export LIBRARY_PATH=$PYTHON3_HOME/lib:$LIBRARY_PATH
+fi
+
+# PYTHON2
+if [ -e /apps/python2 ]; then
+  export PYTHON2_HOME=/apps/python2
+  export PYTHON2_LIBHOME=/apps/python2lib
+  export PATH=$PYTHON2_HOME/bin:$PATH
+  export PYTHONPATH=$PYTHON2_HOME/lib/python2.7/site-packages
+  export PYTHONLIB=$PYTHON2_HOME/lib/python2.7/site-packages
+  export PKG_CONFIG_PATH=$PYTHON2_HOME/lib/pkgconfig:$PKG_CONFIG_PATH
+  export CPATH=$PYTHON2_HOME/include:$CPATH
+  export LD_LIBRARY_PATH=$PYTHON2_HOME/lib:$LD_LIBRARY_PATH
+  export LIBRARY_PATH=$PYTHON2_HOME/lib:$LIBRARY_PATH
+fi
+
+# OPENCV
+if [ -e /apps/opencv3 ]; then
+  export OPENCV_HOME=/apps/opencv3
+  export PATH=$OPENCV_HOME/bin:$PATH
+  export PKG_CONFIG_PATH=$OPENCV_HOME/lib/pkgconfig:$PKG_CONFIG_PATH
+  export CPATH=$OPENCV_HOME/include:$CPATH
+  export LD_LIBRARY_PATH=$OPENCV_HOME/lib:$LD_LIBRARY_PATH
+  export LIBRARY_PATH=$OPENCV_HOME/lib:$LIBRARY_PATH
+fi
+
+# go
+if [ -e /apps/go ]; then
+  export GOROOT=/apps/go
+  export PATH=$GOROOT/bin:$PATH
+fi
+
+# rust cargo
+if [ -e /apps/cargo ]; then
+  export CARGO_HOME=/apps/cargo
+  export PATH=$CARGO_HOME/bin:$PATH
+fi
+
+# PIP
+if [ -e /apps/pip ]; then
+  export PYTHONSTARTUP=$HOME/.pythonrc.py
+  export PIP_HOME=/apps/apps/pip
+fi
+
+# VIM
+if [ -e /apps/perl5 ]; then
+  export VIM_HOME=/apps/vim
+  export PATH=$VIM_HOME/bin:$PATH
+fi
+
+# GIT
+if [ -e /apps/perl5 ]; then
+  export GIT_HOME=/apps/git
+  export PATH=$GIT_HOME/bin:$PATH
+fi
+
+# ANTLR4
+if [ -e /apps/perl5 ]; then
+  export ANTLR4_HOME=/apps/antlr
+  export PATH=$ANTLR4_HOME/bin:$PATH
+fi

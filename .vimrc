@@ -34,9 +34,22 @@
 "
 "
 "
-" " set the runtime path to include Vundle and initialize
-" set rtp+=~/.vim/bundle/Vundle.vim
-" call vundle#begin()
+" set the runtime path to include Vundle and initialize
+set nocompatible              " be iMproved, required
+"if has('python') " if dynamic py|py3, this line already activates python2.
+"  let s:python_version = 2
+"elseif has('python3')
+"  let s:python_version = 3
+"else
+"  let s:python_version = 0
+"endif
+"echomsg 'Using python'.s:python_version   
+filetype off                  " required
+set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Bundle 'davidhalter/jedi-vim'
 " " alternatively, pass a path where Vundle should install plugins
 " "call vundle#begin('~/some/path/here')
 " 
@@ -68,8 +81,8 @@
 " Plugin 'git://git.code.sf.net/p/ccglue/git'
 " 
 " " All of your Plugins must be added before the following line
-" call vundle#end()            " required
-" filetype plugin indent on    " required
+call vundle#end()            " required
+filetype plugin indent on    " required
 " " To ignore plugin indent changes, instead use:
 " "filetype plugin on
 " "
@@ -134,13 +147,15 @@ call pathogen#incubate()
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
+"set nocp
 " allow unsaved background buffers and remember marks/undo for them
 set hidden
-set bh=hide
+set bufhidden=hide
+"set bh=hide
 " remember more commands and search history
-set history=100000
+"set history=100000
+set history=10000
 set undolevels=100000
-set nocp
 set expandtab
 set tabstop=2
 "set ts=2
@@ -150,11 +165,16 @@ set shiftround
 set softtabstop=2
 "set sts=2
 set autoindent
+"set ai
 set autowrite
+"set aw
 set notextmode
+"set notx
 set notextauto
 set laststatus=2
+"set ls=2
 set pastetoggle=<F2>
+"set pt=<F2>
 set showmatch
 set matchtime=3
 inoremap } }<Left><c-o>%<c-o>:sleep 500m<CR><c-o>%<c-o>a
@@ -164,16 +184,20 @@ set hlsearch
 set incsearch
 set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,GB18030,cp936,big5,euc-jp,euc-kr,latin1
+set fileencodings=ucs-bom,utf-8,gb18030,chinese,cp936,big5,euc-jp,euc-kr,latin1
 set fileformats=unix,dos
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase
 set smartcase
 " highlight current line
 set cursorline
+"set cul
+"set cursorcolumn
+"set cuc
 set cmdheight=2
 set switchbuf=useopen
 set numberwidth=5
+"set nuw=5
 set showtabline=2
 set winwidth=79
 " This makes RVM work inside Vim. I have no idea why.
@@ -192,13 +216,15 @@ set backspace=indent,eol,start
 " display incomplete commands
 set showcmd
 " Enable highlighting for syntax
+let python_highlight_all=1
 syntax on
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
 " use emacs-style tab completion when selecting files, etc
-"set wildmode=longest,list:full
-set wildmode=longest,full
+set wildmode=longest,list
 " make tab completion for files/buffers act like bash
 set wildmenu
 set wildignore+=*.o,*.a,*.so,*.obj,*.exe,*.class,*.swp,*.swo,*.pyc,*.elc,*.lib,*.ncb,*.opt,*.plg,.svn,.git,.hg,CVS
@@ -232,10 +258,10 @@ augroup vimrcEx
   au FileType c,cpp  ab #l /******************************************************************************/
 
   "for ruby, autoindent with two spaces, always expand tabs
-  au FileType perl,ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  au FileType python set sw=2 sts=2 et omnifunc=pythoncomplete
+  au FileType python,perl,ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+  "au FileType python set sw=2 sts=2 et omnifunc=pythoncomplete
 
-  au FileType javascript set omnifunc=javascriptcomplete
+  "au FileType javascript set omnifunc=javascriptcomplete
   au FileType html set omnifunc=htmlcomplete
   au FileType css set omnifunc=csscomplete
   au FileType xml set omnifunc=xmlcomplete
@@ -1015,4 +1041,45 @@ augroup vimOPMap
   au!
   "au BufRead onoremap <leader>n( :<c-u>execute normal! f(vi(<cr>
   "onoremap <leader>l( :<c-u>normal! F)vi(<cr>
+augroup end
+
+augroup vimJedi
+  au!
+  au FileType python let g:jedi#popup_on_dot = 0
+  au FileType python let g:jedi#popup_select_first = 0
+  au FileType python let g:jedi#show_call_signatures = 1
+  au FileType python let g:jedi#auto_initialization = 1
+  au FileType python let g:jedi#auto_vim_configuration = 0
+  au FileType python let g:jedi#use_tabs_not_buffers = 1
+  au FileType python let g:jedi#use_splits_not_buffers = "left"
+
+  au FileType python let g:jedi#goto_command = "<leader>d"
+  au FileType python let g:jedi#goto_assignments_command = "<leader>g"
+  au FileType python let g:jedi#goto_definitions_command = ""
+  au FileType python let g:jedi#documentation_command = "K"
+  au FileType python let g:jedi#usages_command = "<leader>n"
+  au FileType python let g:jedi#completions_command = "<leader>c"
+  au FileType python let g:jedi#rename_command = "<leader>r"
+
+  au FileType python let g:jedi#completions_enabled = 1
+augroup end
+
+augroup vimTern
+  au!
+  au FileType javascript let g:ycm_min_num_of_chars_for_completion = 3 
+  au FileType javascript let g:ycm_autoclose_preview_window_after_completion=1
+  au FileType javascript let g:ycm_complete_in_comments = 1
+  au FileType javascript let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+  au FileType javascript let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+  " use tab
+  function! TernTab()
+    let line = getline('.')
+    let substr = strpart(line, -1, col('.')+1)
+    let substr = matchstr(substr, "[^ \t]*$")
+    if strlen(substr) == 0
+      return "\<tab>"
+    endif
+    return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
+  endfunction
+  au FileType javascript inoremap <tab> <c-r>=TernTab()<cr>
 augroup end
