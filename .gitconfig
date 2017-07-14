@@ -2,9 +2,13 @@
 	name = kings
 	email = kings@mars
 [alias]
-  lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-  lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  lg1 = reflog --boundary -g --abbrev-commit --decorate --format=format:'%C(bold white)%h%C(reset) - %C(bold green)(%ai)%C(reset) %C(bold 220)%>(12)%gd%C(reset) %C(bold white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  lg2 = log --boundary --graph --abbrev-commit --decorate --format=format:'%C(bold white)%h%C(reset) - %C(bold 154)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(bold white)%s%C(reset) %C(bold 248)%n          %C(bold 240)%an <%ae> (committer: %cn <%ce>)%C(reset)' --all
+  lg3 = reflog --boundary --abbrev-commit --decorate --format=format:'%C(bold 255)%h%C(reset) - %C(bold 154)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold 220)%gd%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(bold 255)%s%C(reset) %C(dim 250)- %an%C(reset)' --all
   lg = !"git lg1"
+  vdiff = difftool --tool=vimdiff
+  hdiff = difftool --tool=vimdiff2
+  difffile = diff --name-only
 [core]
 	excludesfile = $HOME/.gitignore_global
 	editor = vim
@@ -18,13 +22,19 @@
 [difftool "vimdiff"]
 	cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
   renames = true
+[difftool "vimdiff2"]
+	cmd = vimdiff -o \"$LOCAL\" \"$REMOTE\"
+  renames = true
 [merge]
 	conflictstyle = diff3
 	tool = vimdiff
 [mergetool]
   prompt = true
 [mergetool "vimdiff"]
-	cmd = vimdiff \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = vimdiff -f -d -c 'wincmd J' "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+	trustExitCode = true
+[mergetool "vimdiff2"]
+	cmd = vimdiff -f -d -c 'wincmd l' "$MERGED" "$LOCAL" "$REMOTE"
 	trustExitCode = true
 [branch]
 	autosetuprebase = always
@@ -62,7 +72,28 @@
   branch = 111 bold
   nobranch = 154 bold
   unmerged = 87
+[color "interactive"]
+	prompt = 226 bold
+	header = 255 bold
+	help = 111
+	error = 87
+[color "graph"]
+# generate by
+# paste <(echo {253..239} | sed 's@\s@\n@g') <(echo {22..51} | sed 's@\s@\n@g' | sed -n '0~2p') <(echo {51..22} | sed 's@\s@\n@g' | sed -n '1~2p') | perl -pe 's@\s@,@g'
+  #graphcolors = 51,226,20,50,21,49,22,48,23,47,24,46,25,45,26,44,27,43,28,42,29,41,30,40,31,39,32,38,33,37,34,36,35,35,36,34,37,33,38,32,39,31,40,30,41,29,42,28,43,27,44,26,45,25,46,24,47,23,48,22,49,21,50,20,51
+  #graphcolors = 23,50,225,25,48,227,27,46,229,29,44,231,31,42,233,33,40,235,35,38,237,37,36,239,39,34,241,41,32,243,43,30,245,45,28,247,47,26,249,49,24,251,51,22,253,
+  #graphcolors = 239,23,51,240,25,49,241,27,47,242,29,45,243,31,43,244,33,41,245,35,39,246,37,37,247,39,35,248,41,33,249,43,31,250,45,29,251,47,27,252,49,25,253,51,23,
+  columns = 253,23,51,252,25,49,251,27,47,250,29,45,249,31,43,248,33,41,247,35,39,246,37,37,245,39,35,244,41,33,243,43,31,242,45,29,241,47,27,240,49,25,239,51,23,
+[color "branch"]
+  columns = 253,23,51,252,25,49,251,27,47,250,29,45,249,31,43,248,33,41,247,35,39,246,37,37,245,39,35,244,41,33,243,43,31,242,45,29,241,47,27,240,49,25,239,51,23,
 [push]
 	default = current
 [http]
 	sslVerify = false
+[credential]
+	helper = --help
+[i18n]
+	commitencoding = ISO-8859
+	logoutputencoding = ISO-8859
+[gc]
+	auto = 1
