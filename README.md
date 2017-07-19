@@ -53,5 +53,3 @@ Dot Files Managements
 
 * .vlockrc
 > vlock resource file
-
-* test
