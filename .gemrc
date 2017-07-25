@@ -1,0 +1,12 @@
+---
+:backtrace: true
+:bulk_threshold: 1000
+:sources:
+- https://gems.ruby-china.org/
+- https://rubygems.org/
+- https://ruby.taobao.org/
+:update_sources: true
+:verbose: true
+gemhome: /apps/rubygem
+gem: --no-ri --no-rdoc --bindir /apps/rubygem/bin
+benchmark: false
