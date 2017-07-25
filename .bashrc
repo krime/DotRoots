@@ -345,8 +345,14 @@ if [ -e /apps/protobuf ]; then
   export PKG_CONFIG_PATH=$PROTOBUF_HOME/lib/pkgconfig:$PKG_CONFIG_PATH
 fi
 
+# RUBY
+if [ -e /apps/ruby ]; then
+  export RUBY_HOME=/apps/ruby
+  export PATH=$RUBY_HOME/bin:$PATH
+fi
+
 # GEM
-if [ -e /apps/gem ]; then
+if [ -e /apps/rubygem ]; then
   export GEM_HOME=/apps/gem
   export PATH=$GEM_HOME/bin:$PATH
 fi
@@ -425,4 +431,11 @@ fi
 if [ -e /apps/perl5 ]; then
   export ANTLR4_HOME=/apps/antlr
   export PATH=$ANTLR4_HOME/bin:$PATH
+fi
+
+# MSF
+if [ -e /apps/msf ]; then
+  export MSF_HOME=/apps/msf
+  export MSF_DATABASE_CONFIG=$MSF_HOME/database.yml
+  export PATH=$MSF_HOME/bin:$PATH
 fi
